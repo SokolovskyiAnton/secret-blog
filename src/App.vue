@@ -11,13 +11,12 @@ import api from './api'
 export default {
 	data() {
 		return {
-			posts: [],
+      posts: [],
 		};
 	},
 	async mounted() {
     const response = (await api.get('/posts')).data;
-    this.posts = response.data;
-      
+    this.posts = response.data;      
 	},
 };
 </script>
