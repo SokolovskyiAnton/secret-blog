@@ -14,6 +14,7 @@
 	--input-background-color: #f5f5f5;
 	--blue-color: #089fe0;
 	--background-gradient: linear-gradient(30deg, #f3959b, #f9b4c5, #fec6c6);
+	--red-color: rgb(231, 105, 105);
 }
 
 body {
@@ -87,6 +88,7 @@ body {
 
 .button-arrow {
 	position: relative;
+	margin-top: 22px;
 }
 
 .button-arrow:hover,
@@ -142,6 +144,22 @@ input:placeholder-shown {
 	text-decoration: none;
 	color: var(--blue-color);
 	cursor: pointer;
+}
+
+.error-span {
+	color: var(--red-color);
+	font-size: 14px;
+	display: flex;
+	justify-content: center;
+}
+
+.error-span-last-first-name {
+	display: flex;
+	justify-content: space-around;
+}
+
+.errorBorder {
+	border: 1px solid var(--red-color);
 }
 
 @media (max-width: 375px) {

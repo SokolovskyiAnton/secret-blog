@@ -5,15 +5,20 @@
 <script>
 import api from "./api";
 import router from "./router";
+import { useVuelidate } from "@vuelidate/core";
 
 export default {
+	setup() {
+		return { v$: useVuelidate() };	
+	},
 	name: "App",
 	components: {
-		router
+		router,
 	},
 	data() {
 		return {
 			posts: [],
+
 		};
 	},
 	async mounted() {
