@@ -42,7 +42,10 @@
 					{{ v$.email.$errors[0].$message }}
 				</span>
 				<div class="login-form__button-arrow">
-					<button class="login-form__button login-form__button--blue" @click.prevent="logIn">
+					<button
+						class="login-form__button login-form__button--blue"
+						@click.prevent="logIn"
+					>
 						Log in
 					</button>
 				</div>
@@ -50,7 +53,9 @@
 					<p>
 						Don't have an account?
 						<span
-							><router-link class="login-footer__plain-link" :to="{ name: 'SignupView' }"
+							><router-link
+								class="login-footer__plain-link"
+								:to="{ name: 'SignupView' }"
 								>Create one</router-link
 							></span
 						>

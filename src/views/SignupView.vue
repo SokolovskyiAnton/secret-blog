@@ -19,20 +19,22 @@
 						class="signup-form__input-field"
 						placeholder="Username"
 						v-model.trim="userName"
-						:class="{ errorBorder: shouldApplyErrorBorder('userName') }"
+						:class="{ errorBorder: v$.userName.$error }"
 					/>
 				</div>
 				<span v-if="v$.userName.$error" class="signup-form__error-span">
 					{{ v$.userName.$errors[0].$message }}
 				</span>
-				<div class="signup-form__input-box signup-form__input-box--first-last-name-input">
+				<div
+					class="signup-form__input-box signup-form__input-box--first-last-name-input"
+				>
 					<div class="signup-form__input-error-box">
 						<input
 							type="text"
 							class="signup-form__input-field signup-form__input-field--firstname-input"
 							placeholder="First name"
 							v-model.trim="firstName"
-							:class="{ errorBorder: shouldApplyErrorBorder('firstName') }"
+							:class="{ errorBorder: v$.firstName.$error }"
 						/>
 						<span
 							v-if="v$.firstName.$error"
@@ -47,7 +49,7 @@
 							class="signup-form__input-field signup-form__input-field--firstname-input"
 							placeholder="Last name"
 							v-model.trim="lastName"
-							:class="{ errorBorder: shouldApplyErrorBorder('lastName') }"
+							:class="{ errorBorder: v$.lastName.$error }"
 						/>
 						<span
 							v-if="v$.lastName.$error"
@@ -63,14 +65,17 @@
 						class="signup-form__input-field"
 						placeholder="Email"
 						v-model.trim="email"
-						:class="{ errorBorder: shouldApplyErrorBorder('email') }"
+						:class="{ errorBorder: v$.email.$error }"
 					/>
 				</div>
 				<span v-if="v$.email.$error" class="signup-form__error-span">
 					{{ v$.email.$errors[0].$message }}
 				</span>
 				<div class="signup-form__button--arrow">
-					<button class="signup-form__button signup-form__button--blue" @click.prevent="signUp">
+					<button
+						class="signup-form__button signup-form__button--blue"
+						@click.prevent="handleSubmit"
+					>
 						Sign up
 					</button>
 					<img
@@ -87,7 +92,9 @@
 					/>
 					<p class="signup-footer__terms-agree">
 						I have read and agree to
-						<span class="signup-footer__terms-of-service">Terms of Service</span>
+						<span class="signup-footer__terms-of-service"
+							>Terms of Service</span
+						>
 					</p>
 				</div>
 				<span v-if="v$.checked.$error" class="signup-form__error-span">
@@ -114,7 +121,7 @@ export default {
 			email: "",
 			minLength: "",
 			checked: "",
-			isInvalid: false,
+			isInvalid: "",
 		};
 	},
 	validations() {
@@ -126,22 +133,12 @@ export default {
 			checked: { sameAs: sameAs(true) },
 		};
 	},
-	computed: {
-		shouldApplyErrorBorder() {
-			return (field) => {
-				return this.isInvalid && this.v$[field].$error;
-			};
-		},
-	},
 	methods: {
-		signUp() {
-			this.v$.$validate();
-			if (!this.v$.$error) {
-				this.isInvalid = false;
-			} else {
-				this.isInvalid = true;
+		handleSubmit() {
+			if (this.v$.$invalid) {
+				this.v$.$touch();
+				return;
 			}
-			console.log(this.isInvalid);
 		},
 	},
 };
