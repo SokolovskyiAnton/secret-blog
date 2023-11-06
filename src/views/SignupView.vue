@@ -119,9 +119,7 @@ export default {
 			firstName: "",
 			lastName: "",
 			email: "",
-			minLength: "",
 			checked: "",
-			isInvalid: "",
 		};
 	},
 	validations() {
