@@ -71,6 +71,18 @@
 				<span v-if="v$.email.$error" class="signup-form__error-span">
 					{{ v$.email.$errors[0].$message }}
 				</span>
+				<div class="signup-form__input-box">
+					<input
+						type="text"
+						class="signup-form__input-field"
+						placeholder="Password"
+						v-model.trim="password"
+						:class="{ errorBorder: v$.password.$error }"
+					/>
+				</div>
+				<span v-if="v$.password.$error" class="signup-form__error-span">
+					{{ v$.password.$errors[0].$message }}
+				</span>
 				<div class="signup-form__button--arrow">
 					<button
 						class="signup-form__button signup-form__button--blue"
@@ -119,6 +131,7 @@ export default {
 			firstName: "",
 			lastName: "",
 			email: "",
+			password: "",
 			checked: "",
 		};
 	},
@@ -128,6 +141,7 @@ export default {
 			firstName: { required },
 			lastName: { required },
 			email: { required, email },
+			password: { required },
 			checked: { sameAs: sameAs(true) },
 		};
 	},

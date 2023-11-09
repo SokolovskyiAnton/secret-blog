@@ -9,30 +9,6 @@
 					<input
 						type="text"
 						class="login-form__input-field"
-						placeholder="First name"
-						v-model.trim="firstName"
-						:class="{ errorBorder: v$.firstName.$error }"
-					/>
-				</div>
-				<span v-if="v$.firstName.$error" class="login-form__error-span">
-					{{ v$.firstName.$errors[0].$message }}
-				</span>
-				<div class="login-form__input-box">
-					<input
-						type="text"
-						class="login-form__input-field"
-						placeholder="Last name"
-						v-model.trim="lastName"
-						:class="{ errorBorder: v$.lastName.$error }"
-					/>
-				</div>
-				<span v-if="v$.lastName.$error" class="login-form__error-span">
-					{{ v$.lastName.$errors[0].$message }}
-				</span>
-				<div class="login-form__input-box">
-					<input
-						type="text"
-						class="login-form__input-field"
 						placeholder="Email"
 						v-model.trim="email"
 						:class="{ errorBorder: v$.email.$error }"
@@ -40,6 +16,18 @@
 				</div>
 				<span v-if="v$.email.$error" class="login-form__error-span">
 					{{ v$.email.$errors[0].$message }}
+				</span>
+				<div class="login-form__input-box">
+					<input
+						type="text"
+						class="login-form__input-field"
+						placeholder="Password"
+						v-model.trim="password"
+						:class="{ errorBorder: v$.password.$error }"
+					/>
+				</div>
+				<span v-if="v$.password.$error" class="login-form__error-span">
+					{{ v$.password.$errors[0].$message }}
 				</span>
 				<div class="login-form__button-arrow">
 					<button
@@ -69,24 +57,25 @@
 <script>
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
+import { useUserStore } from "@/stores/userStore"
+
 
 export default {
 	setup() {
-		return { v$: useVuelidate() };
+		return { v$: useVuelidate(), userStore: useUserStore()};
 	},
 	data() {
 		return {
-			firstName: "",
-			lastName: "",
 			email: "",
+			password: "",
 			isInvalid: false,
+			
 		};
 	},
 	validations() {
 		return {
-			firstName: { required },
-			lastName: { required },
 			email: { required, email },
+			password: { required }
 		};
 	},
 	methods: {
