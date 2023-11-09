@@ -57,25 +57,23 @@
 <script>
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
-import { useUserStore } from "@/stores/userStore"
-
+import { useUserStore } from "@/stores/userStore";
 
 export default {
 	setup() {
-		return { v$: useVuelidate(), userStore: useUserStore()};
+		return { v$: useVuelidate(), userStore: useUserStore() };
 	},
 	data() {
 		return {
 			email: "",
 			password: "",
 			isInvalid: false,
-			
 		};
 	},
 	validations() {
 		return {
 			email: { required, email },
-			password: { required }
+			password: { required },
 		};
 	},
 	methods: {
@@ -84,6 +82,8 @@ export default {
 				this.v$.$touch();
 				return;
 			}
+
+			this.userStore.login(this.email, this.password);
 		},
 	},
 };
