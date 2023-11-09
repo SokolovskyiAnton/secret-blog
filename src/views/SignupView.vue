@@ -109,13 +109,20 @@ export default {
 		};
 	},
 	methods: {
-		handleSubmit() {
+		async handleSubmit() {
 			if (this.v$.$invalid) {
 				this.v$.$touch();
 				return;
 			}
 
-			this.userStore.signup(this.email, this.password, this.userName);
+			const result = await this.userStore.signup(
+				this.email,
+				this.password,
+				this.userName
+			);
+
+			// if true, redirect to LoginView
+			if (result) this.$router.push({ name: "LoginView" });
 		},
 	},
 };
