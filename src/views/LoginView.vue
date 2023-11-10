@@ -82,10 +82,15 @@ export default {
 				if (this.v$.$invalid) {
 					this.v$.$touch();
 					return;
-				} 
+				}
 
-				const response = await this.userStore.login(this.email, this.password);
-				console.log(response);
+				const token = await this.userStore.login(this.email, this.password);
+
+				localStorage.setItem("authToken", token);
+
+				await this.userStore.getUser(token);
+
+				this.$router.push({ name: "HomeView" });
 			} catch (error) {
 				console.log("The user does not exist!");
 			}

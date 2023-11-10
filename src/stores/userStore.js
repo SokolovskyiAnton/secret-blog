@@ -10,12 +10,14 @@ export const useUserStore = defineStore("users", {
 	actions: {
 		async login(email, password) {
 			try {
-				const response = await api.post("/auth/", {
-					email,
-					password,
-				});
-
-				return response.data.token;
+				debugger;
+				const token = (
+					await api.post("/auth/", {
+						email,
+						password,
+					})
+				).data.token;
+				return token;
 			} catch (error) {
 				throw error;
 			}
@@ -30,6 +32,13 @@ export const useUserStore = defineStore("users", {
 			} catch (error) {
 				throw error;
 			}
+		},
+		async getUser(token) {
+			await api.get("/auth/user", {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
 		},
 	},
 });
