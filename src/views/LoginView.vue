@@ -86,9 +86,7 @@ export default {
 
 				await this.userStore.login(this.email, this.password);
 
-				const token = localStorage.getItem("authToken");
-
-				await this.userStore.getUser(token);
+				await this.userStore.getUser();
 
 				this.$router.push({ name: "HomeView" });
 			} catch (error) {
