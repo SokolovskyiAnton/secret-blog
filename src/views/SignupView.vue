@@ -39,7 +39,7 @@
 				</span>
 				<div class="signup-form__input-box">
 					<input
-						type="text"
+						type="password"
 						class="signup-form__input-field"
 						placeholder="Password"
 						v-model.trim="password"
@@ -110,19 +110,18 @@ export default {
 	},
 	methods: {
 		async handleSubmit() {
-			if (this.v$.$invalid) {
-				this.v$.$touch();
-				return;
+			try {
+				if (this.v$.$invalid) {
+					this.v$.$touch();
+					return;
+				}
+
+				await this.userStore.signup(this.email, this.password, this.userName);
+
+				this.$router.push({ name: "LoginView" });
+			} catch (error) {
+				console.log(error);
 			}
-
-			const result = await this.userStore.signup(
-				this.email,
-				this.password,
-				this.userName
-			);
-
-			// if true, redirect to LoginView
-			if (result) this.$router.push({ name: "LoginView" });
 		},
 	},
 };

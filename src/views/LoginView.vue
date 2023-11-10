@@ -19,7 +19,7 @@
 				</span>
 				<div class="login-form__input-box">
 					<input
-						type="text"
+						type="password"
 						class="login-form__input-field"
 						placeholder="Password"
 						v-model.trim="password"
@@ -77,13 +77,18 @@ export default {
 		};
 	},
 	methods: {
-		handleSubmit() {
-			if (this.v$.$invalid) {
-				this.v$.$touch();
-				return;
-			}
+		async handleSubmit() {
+			try {
+				if (this.v$.$invalid) {
+					this.v$.$touch();
+					return;
+				} 
 
-			this.userStore.login(this.email, this.password);
+				const response = await this.userStore.login(this.email, this.password);
+				console.log(response);
+			} catch (error) {
+				console.log("The user does not exist!");
+			}
 		},
 	},
 };

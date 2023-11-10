@@ -14,22 +14,21 @@ export const useUserStore = defineStore("users", {
 					email,
 					password,
 				});
+
+				return response.data.token;
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		},
 		async signup(email, password, name) {
 			try {
-				const response = await api.post("/users/", {
+				await api.post("/users/", {
 					email,
 					password,
 					name,
 				});
-
-				// if request status:200, return true
-				return response.status === 200;
 			} catch (error) {
-				console.log(error);
+				throw error;
 			}
 		},
 	},
