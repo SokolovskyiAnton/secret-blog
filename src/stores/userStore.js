@@ -10,14 +10,15 @@ export const useUserStore = defineStore("users", {
 	actions: {
 		async login(email, password) {
 			try {
-				debugger;
 				const token = (
 					await api.post("/auth/", {
 						email,
 						password,
 					})
 				).data.token;
-				return token;
+        
+        localStorage.setItem("authToken", token);
+        
 			} catch (error) {
 				throw error;
 			}

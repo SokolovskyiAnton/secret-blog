@@ -84,9 +84,9 @@ export default {
 					return;
 				}
 
-				const token = await this.userStore.login(this.email, this.password);
+				await this.userStore.login(this.email, this.password);
 
-				localStorage.setItem("authToken", token);
+				const token = localStorage.getItem("authToken");
 
 				await this.userStore.getUser(token);
 
