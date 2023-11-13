@@ -34,13 +34,7 @@ export const useUserStore = defineStore("users", {
 			}
 		},
 		async getUser() {
-			const token = localStorage.getItem("authToken");
-
-			await api.get("/auth/user", {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			});
+			await api.get("/auth/user");
 		},
 	},
 });
