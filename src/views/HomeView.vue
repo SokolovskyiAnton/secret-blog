@@ -9,8 +9,8 @@ export default {
     setup() {
         return { postStore: usePostStore()}
     },
-	mounted() {
-		this.postStore.getPost();
+	async mounted() {
+		await this.postStore.getPost();
 	},
 };
 </script>

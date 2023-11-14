@@ -3,7 +3,7 @@ import api from "../api";
 
 export const usePostStore = defineStore("posts", {
 	state: () => ({
-		posts: [],
+		posts: {},
 	}),
 	actions: {
 		async getPost() {

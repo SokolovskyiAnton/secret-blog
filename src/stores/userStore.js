@@ -3,7 +3,7 @@ import api from "../api";
 
 export const useUserStore = defineStore("users", {
 	state: () => ({
-		users: [],
+		users: {},
 	}),
 	actions: {
 		async login(email, password) {
