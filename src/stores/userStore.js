@@ -3,9 +3,7 @@ import api from "../api";
 
 export const useUserStore = defineStore("users", {
 	state: () => ({
-		firstName: "",
-		lastName: "",
-		email: "",
+		users: [],
 	}),
 	actions: {
 		async login(email, password) {
@@ -34,7 +32,11 @@ export const useUserStore = defineStore("users", {
 			}
 		},
 		async getUser() {
-			await api.get("/auth/user");
+			const userData = await api.get("/auth/user");
+			this.users = userData;			
 		},
 	},
 });
+
+
+

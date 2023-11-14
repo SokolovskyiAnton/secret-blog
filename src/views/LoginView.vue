@@ -89,6 +89,7 @@ export default {
 				await this.userStore.getUser();
 
 				this.$router.push({ name: "HomeView" });
+
 			} catch (error) {
 				console.log("The user does not exist!");
 			}
