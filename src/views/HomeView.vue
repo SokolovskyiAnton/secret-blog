@@ -7,7 +7,7 @@ import { usePostStore } from "../stores/postStore";
 
 export default {
     setup() {
-        return { postStore: usePostStore()}
+        return { postStore: usePostStore() }
     },
 	async mounted() {
 		await this.postStore.getPost();

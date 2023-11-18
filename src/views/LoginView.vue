@@ -86,6 +86,8 @@ export default {
 
 				await this.userStore.login(this.email, this.password);
 
+				await this.userStore.isAuth == true;
+
 				await this.userStore.getUser();
 
 				this.$router.push({ name: "HomeView" });

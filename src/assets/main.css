@@ -11,20 +11,18 @@
 :root {
 	--title-color: #333333;
 	--text-color: #666666;
-	--container-color: #f6eeee;
+	--container-color: #f6eeee; 
 	--input-background-color: #f5f5f5;
 	--blue-color: #089fe0;
 	--background-gradient: linear-gradient(30deg, #f3959b, #f9b4c5, #fec6c6);
 	--red-color: rgb(231, 105, 105);
+	--header-color: #D97474;
 }
 
 body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	width: 100%;
 	min-height: 100vh;
-	background: var(--background-gradient);
+	
 }
 
 .signup-header__subtitle {
@@ -40,8 +38,12 @@ body {
 
 .signup-wrapper,
 .login-wrapper {
-	width: 582px;
-	height: 573px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	min-height: 100vh;
+	background: var(--background-gradient);
 }
 
 .signup-container,
@@ -171,6 +173,15 @@ input:placeholder-shown {
 .errorBorder {
 	border: 1px solid var(--red-color);
 }
+
+
+.header {
+	background-color: var(--header-color);
+}
+
+
+
+
 
 @media (max-width: 375px) {
 	.signup-form__input-box--first-last-name-input {
