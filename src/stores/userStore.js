@@ -4,6 +4,7 @@ import api from "../api";
 export const useUserStore = defineStore("users", {
 	state: () => ({
 		users: {},
+		isAuth: false,
 	}),
 	actions: {
 		async login(email, password) {
