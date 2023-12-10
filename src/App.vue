@@ -1,4 +1,5 @@
 <template>
+	<header-view></header-view>
 	<router-view />
 </template>
 
@@ -6,6 +7,7 @@
 import api from "./api";
 import router from "./router";
 import { useVuelidate } from "@vuelidate/core";
+import HeaderView from "./components/HeaderView.vue";
 
 export default {
 	setup() {
@@ -14,6 +16,7 @@ export default {
 	name: "App",
 	components: {
 		router,
+		HeaderView,
 	},
 	data() {
 		return {
