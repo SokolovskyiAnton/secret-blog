@@ -7,7 +7,7 @@
 import api from "./api";
 import router from "./router";
 import { useVuelidate } from "@vuelidate/core";
-import HeaderView from "./components/HeaderView.vue";
+import HeaderComponent from "./components/HeaderComponent.vue";
 
 export default {
 	setup() {
@@ -16,7 +16,7 @@ export default {
 	name: "App",
 	components: {
 		router,
-		HeaderView,
+		HeaderComponent,
 	},
 	data() {
 		return {

@@ -31,7 +31,7 @@
 import { useUserStore } from "@/stores/userStore";
 
 export default {
-	name: "HeaderView",
+	name: "HeaderComponent",
 	setup() {
 		return { userStore: useUserStore() };
 	},
