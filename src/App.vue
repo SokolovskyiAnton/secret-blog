@@ -1,5 +1,5 @@
 <template>
-	<header-view></header-view>
+	<header-component></header-component>
 	<router-view />
 </template>
 
