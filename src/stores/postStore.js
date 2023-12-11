@@ -5,6 +5,13 @@ export const usePostStore = defineStore("posts", {
 	state: () => ({
 		posts: {},
 	}),
+	getters: {
+		getPosts(state) {
+			const gottenPost = state.posts;
+			console.log("gottenPostData:", gottenPost.data);
+			return gottenPost.data;
+		},
+	},
 	actions: {
 		async getPost() {
 			try {
