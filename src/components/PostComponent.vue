@@ -4,16 +4,17 @@
 			<h1>{{ post.title }}</h1>
 			<img
 				src="../assets/images/post-picture.svg"
-				alt="a woman decorating a christmas tree"
+				alt="mountains"
 			/>
 			<p>{{ post.description }}</p>
-			<small>{{ formatDate(post.dateCreated) }}</small>
+			<small>{{ formattedDate }}</small>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import dayjs from "dayjs";
+import { useDateFormat } from "./composables/date";
+import { ref, computed } from "vue";
 
 const props = defineProps({
 	post: {
@@ -22,10 +23,13 @@ const props = defineProps({
 	},
 });
 
-const formatDate = (dateString) => {
-	const date = dayjs(dateString);
-	return date.format("dddd, MMMM D, YYYY");
-};
+const postRef = ref(props.post);
+
+const { format } = useDateFormat();
+
+const formattedDate = computed(() => {
+    return format(postRef.value.dateCreated);
+});
 </script>
 
 <style>
@@ -34,7 +38,4 @@ const formatDate = (dateString) => {
 	justify-content: center;
 	margin: 20px 20px;
 }
-
-
-
 </style>

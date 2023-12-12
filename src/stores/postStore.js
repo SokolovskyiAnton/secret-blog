@@ -3,20 +3,17 @@ import api from "../api";
 
 export const usePostStore = defineStore("posts", {
 	state: () => ({
-		posts: {},
+		posts: [],
 	}),
 	getters: {
-		getPosts(state) {
-			const gottenPost = state.posts;
-			console.log("gottenPostData:", gottenPost.data);
-			return gottenPost.data;
-		},
+		getPosts: ({ posts }) => posts,
 	},
 	actions: {
-		async getPost() {
+		async getPostList() {
 			try {
-				const postData = await api.get("/posts");
 				this.posts = postData;
+				const res = await api.get("/posts");
+				this.posts = res.data;
 			} catch (error) {
 				throw error;
 			}

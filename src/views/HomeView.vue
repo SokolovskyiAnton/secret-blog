@@ -17,13 +17,11 @@ const postStore = usePostStore();
 const posts = ref([]);
 
 onMounted(async () => {
-	const postData = await postStore.getPost();
-	posts.value = postData;
+	await postStore.getPostList();
 });
 
 const postsData = computed(() => {
-	const data = postStore.getPosts;
-	return data;
+	return postStore.getPosts;
 });
 </script>
 

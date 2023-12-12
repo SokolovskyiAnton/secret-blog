@@ -21,7 +21,7 @@ const router = createRouter({
 			name: "HomeView",
 			component: HomeView,
 		},
-		{ path: "/", component: HomeView, alias: "/home" },
+		{ path: "/"},
 	],
 });
 
