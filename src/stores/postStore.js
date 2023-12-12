@@ -11,7 +11,6 @@ export const usePostStore = defineStore("posts", {
 	actions: {
 		async getPostList() {
 			try {
-				this.posts = postData;
 				const res = await api.get("/posts");
 				this.posts = res.data;
 			} catch (error) {
