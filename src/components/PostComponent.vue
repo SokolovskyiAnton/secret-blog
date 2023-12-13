@@ -13,8 +13,8 @@
 </template>
 
 <script setup>
-import { useDateFormat } from "./composables/date";
-import { ref, computed } from "vue";
+import { useDateFormat } from "../composables/date";
+import { computed } from "vue";
 
 const props = defineProps({
 	post: {
@@ -23,12 +23,10 @@ const props = defineProps({
 	},
 });
 
-const postRef = ref(props.post);
-
 const { format } = useDateFormat();
 
 const formattedDate = computed(() => {
-    return format(postRef.value.dateCreated);
+    return format(props.post.dateCreated);
 });
 </script>
 

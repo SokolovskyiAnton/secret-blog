@@ -4,6 +4,7 @@ import api from "../api";
 export const usePostStore = defineStore("posts", {
 	state: () => ({
 		posts: [],
+		isLoaded: false,
 	}),
 	getters: {
 		getPosts: ({ posts }) => posts,
@@ -11,8 +12,7 @@ export const usePostStore = defineStore("posts", {
 	actions: {
 		async getPostList() {
 			try {
-				const res = await api.get("/posts");
-				this.posts = res.data;
+				this.posts = (await api.get("/posts")).data;
 			} catch (error) {
 				throw error;
 			}

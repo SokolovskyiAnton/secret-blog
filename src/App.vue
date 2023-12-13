@@ -18,16 +18,6 @@ export default {
 		router,
 		HeaderComponent,
 	},
-	data() {
-		return {
-			posts: [],
-
-		};
-	},
-	async mounted() {
-		const response = (await api.get("/posts")).data;
-		this.posts = response.data;
-	},
 };
 </script>
 

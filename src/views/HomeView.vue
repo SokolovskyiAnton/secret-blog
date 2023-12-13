@@ -9,20 +9,21 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from "vue";
+import { onMounted, computed } from "vue";
 import { usePostStore } from "../stores/postStore";
 import PostComponent from "../components/PostComponent.vue";
 
 const postStore = usePostStore();
-const posts = ref([]);
 
 onMounted(async () => {
+	if (postStore.isLoaded) return
+
 	await postStore.getPostList();
+	postStore.isLoaded = true;
+	
 });
 
-const postsData = computed(() => {
-	return postStore.getPosts;
-});
+const postsData = computed(() => postStore.getPosts);
 </script>
 
 <style>
