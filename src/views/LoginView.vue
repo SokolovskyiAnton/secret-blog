@@ -86,11 +86,12 @@ export default {
 
 				await this.userStore.login(this.email, this.password);
 
-				await this.userStore.isAuth == true;
+				const isLogged = this.userStore.getUser();
 
-				await this.userStore.getUser();
-
-				this.$router.push({ name: "HomeView" });
+				if (isLogged) {
+					this.userStore.isAuth = true;
+					this.$router.push({ name: "HomeView" });
+				}
 
 			} catch (error) {
 				console.log("The user does not exist!");

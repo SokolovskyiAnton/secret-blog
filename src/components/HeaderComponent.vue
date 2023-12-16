@@ -3,22 +3,27 @@
 		<div class="header__navbar">
 			<div class="header__navbar--container">
 				<img
-					src="../assets/images/circle-icon.svg"
-					alt="Logo of the unlogged user"
-					class="header__navbar--logo"
-					@click.prevent=""
-					v-if="userStore.isAuth"
-				/>
-				<img
-					src="../assets/images/header-unlogged-icon.svg"
-					alt="Logo of the unlogged user"
+					:src="logoIcon"
+					alt="Logo"
 					class="header__navbar--logo"
 					@click.prevent="goToHome"
 				/>
+				<div v-if="userStore.isAuth">
+					<div class="header__navbar--dropdown">
+						<div class="header__navbar--dropdown-dropbtn">
+							<img src="../assets/images/dropdown-icon.svg" alt="Dropdown" />
+						</div>
+						<div class="header__navbar--dropdown-content">
+							<a href="#" @click.prevent="goToProfile">Profile</a>
+							<a href="#" @click.prevent="logOut" >Log Out</a>
+						</div>
+					</div>
+				</div>
 				<button
+					v-else
 					type="button"
 					class="header__navbar--login-button"
-					@click.prevent="goToLogin"
+					@click.prevent="logIn"
 				>
 					Log In
 				</button>
@@ -27,23 +32,33 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "vue-router";
+import { computed } from "vue";
 
-export default {
-	name: "HeaderComponent",
-	setup() {
-		return { userStore: useUserStore() };
-	},
-	methods: {
-		goToHome() {
-			this.$router.push({ name: "HomeView" });
-		},
-		goToLogin() {
-			this.$router.push({ name: "LoginView" });
-		},
-	},
+const userStore = useUserStore();
+const router = useRouter();
+
+const goToHome = () => {
+	router.push({ name: "HomeView" });
 };
+const logOut = () => {
+	userStore.logout();
+	router.push({ name: "HomeView" });
+};
+const goToProfile = () => {
+	router.push({ name: "ProfileView" })
+}
+const logIn = () => {
+	router.push({ name: "LoginView" })
+}
+
+const logoIcon = computed(() => {
+	return userStore.isAuth === true
+		? "./icons/header-logged-icon.svg"
+		: "./icons/header-unlogged-icon.svg";
+});
 </script>
 
 <style>
@@ -94,5 +109,45 @@ export default {
 .header__navbar--login-button:hover:after {
 	opacity: 1;
 	right: 10px;
+}
+
+.header__navbar--dropdown-dropbtn {
+	background-color: var(--header-color);
+    cursor: pointer;
+}
+
+.header__navbar--dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.header__navbar--dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 104px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	border-radius: 5px;
+	right: 0;
+}
+
+.header__navbar--dropdown-content a {
+	color: var(--text-color);
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.header__navbar--dropdown-content a:hover {
+	background-color: #f1f1f1;
+}
+
+.header__navbar--dropdown:hover .header__navbar--dropdown-content {
+	display: block;
+}
+
+.header__navbar--dropdown:hover .header__navbar--dropdown-dropbtn {
+	background-color: var(--header-color-hover);
 }
 </style>

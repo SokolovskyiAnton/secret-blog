@@ -17,12 +17,12 @@
 	--background-gradient: linear-gradient(30deg, #f3959b, #f9b4c5, #fec6c6);
 	--red-color: rgb(231, 105, 105);
 	--header-color: #D97474;
+	--header-color-hover: #d66464;
 }
 
 body {
 	width: 100%;
 	min-height: 100vh;
-	
 }
 
 .signup-header__subtitle {

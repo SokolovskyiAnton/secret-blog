@@ -34,8 +34,14 @@ export const useUserStore = defineStore("users", {
 		},
 		async getUser() {
 			const userData = await api.get("/auth/user");
-			this.users = userData;			
+			this.users = userData;	
+			// this.isAuth = true;
 		},
+		logout() {
+			debugger
+			this.isAuth = false;
+			localStorage.removeItem("authToken");
+		}
 	},
 });
 

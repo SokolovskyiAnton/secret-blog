@@ -16,11 +16,9 @@ import PostComponent from "../components/PostComponent.vue";
 const postStore = usePostStore();
 
 onMounted(async () => {
-	if (postStore.isLoaded) return
-
+	if (postStore.isLoaded) return;
 	await postStore.getPostList();
 	postStore.isLoaded = true;
-	
 });
 
 const postsData = computed(() => postStore.getPosts);
