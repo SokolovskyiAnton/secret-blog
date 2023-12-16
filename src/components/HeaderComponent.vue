@@ -3,7 +3,7 @@
 		<div class="header__navbar">
 			<div class="header__navbar--container">
 				<img
-					:src="logoIcon"
+					src="../assets/images/blog-logo.svg"
 					alt="Logo"
 					class="header__navbar--logo"
 					@click.prevent="goToHome"
@@ -11,7 +11,7 @@
 				<div v-if="userStore.isAuth">
 					<div class="header__navbar--dropdown">
 						<div class="header__navbar--dropdown-dropbtn">
-							<img src="../assets/images/dropdown-icon.svg" alt="Dropdown" />
+							<img :src="logoIcon" alt="Dropdown" />
 						</div>
 						<div class="header__navbar--dropdown-content">
 							<a href="#" @click.prevent="goToProfile">Profile</a>
