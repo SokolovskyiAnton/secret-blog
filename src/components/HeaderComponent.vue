@@ -4,9 +4,9 @@
 			<div class="header__navbar--container">
 				<router-link to="/">
 					<img
-					src="../assets/images/blog-logo.svg"
-					alt="Logo"
-					class="header__navbar--logo"
+						src="../assets/images/blog-logo.svg"
+						alt="Logo"
+						class="header__navbar--logo"
 				/></router-link>
 				<div v-if="isAuth">
 					<div class="header__navbar--dropdown">
@@ -19,9 +19,16 @@
 						</div>
 					</div>
 				</div>
-			<router-link v-else :to="{ name: 'LoginView' }" class="header__navbar--login-button">
+				<router-link
+					v-else-if="!isLoggedIn"
+					:to="{ name: 'LoginView' }"
+					class="header__navbar--login-button"
+				>
+					Log In
+				</router-link>
+				<!-- <router-link v-else :to="{ name: 'LoginView' }" class="header__navbar--login-button">
 				Log In
-			</router-link>
+			</router-link> -->
 			</div>
 		</div>
 	</div>
@@ -47,6 +54,11 @@ const logoIcon = computed(() => {
 });
 
 const isAuth = computed(() => userStore.isAuth);
+
+const isLoggedIn = computed(() => {
+	return router.currentRoute.value.name === "LoginView" || userStore.isAuth;
+});
+
 </script>
 
 <style>
@@ -102,7 +114,7 @@ const isAuth = computed(() => userStore.isAuth);
 
 .header__navbar--dropdown-dropbtn {
 	background-color: var(--header-color);
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .header__navbar--dropdown {

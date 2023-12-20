@@ -14,6 +14,8 @@ export const loginGuard = (to, from, next) => {
 
 	if (userStore.isAuth) {
 		next(from);
+	} else if (to.name === "LoginView" && userStore.isAuth) {
+		next("/");
 	} else {
 		next();
 	}
