@@ -7,6 +7,7 @@
 			<div class="login-form">
 				<div class="login-form__input-box">
 					<input
+						autofill
 						type="text"
 						class="login-form__input-field"
 						placeholder="Email"
@@ -86,12 +87,9 @@ export default {
 
 				await this.userStore.login(this.email, this.password);
 
-				const isLogged = this.userStore.getUser();
+				await this.userStore.getUser();
 
-				if (isLogged) {
-					this.userStore.isAuth = true;
-					this.$router.push({ name: "HomeView" });
-				}
+				this.$router.push({ name: "HomeView" });
 
 			} catch (error) {
 				console.log("The user does not exist!");

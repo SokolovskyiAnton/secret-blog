@@ -3,9 +3,12 @@ import api from "../api";
 
 export const useUserStore = defineStore("users", {
 	state: () => ({
-		users: {},
+		user: {},
 		isAuth: false,
 	}),
+	getters: {
+		getUserData: (state) => state.user
+	},
 	actions: {
 		async login(email, password) {
 			try {
@@ -33,12 +36,10 @@ export const useUserStore = defineStore("users", {
 			}
 		},
 		async getUser() {
-			const userData = await api.get("/auth/user");
-			this.users = userData;	
-			// this.isAuth = true;
+			this.user = await (api.get("/auth/user")).data;
+			this.isAuth = true;
 		},
 		logout() {
-			debugger
 			this.isAuth = false;
 			localStorage.removeItem("authToken");
 		}

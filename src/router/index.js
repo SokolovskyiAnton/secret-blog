@@ -3,26 +3,26 @@ import LoginView from "../views/LoginView.vue";
 import SignupView from "../views/SignupView.vue";
 import HomeView from "../views/HomeView.vue";
 import ProfileView from "../views/ProfileView.vue";
-import { useUserStore } from "../stores/userStore";
+import { profileGuard, loginGuard, signupGuard } from "../router/guards";
 
 const routes = [
 	{
 		path: "/signup",
 		name: "SignupView",
 		component: SignupView,
-		meta: { auth: false },
+		beforeEnter: signupGuard,
 	},
 	{
 		path: "/login",
 		name: "LoginView",
 		component: LoginView,
-		meta: { auth: false },
+		beforeEnter: loginGuard,
 	},
 	{
 		path: "/profile",
 		name: "ProfileView",
 		component: ProfileView,
-		meta: { auth: true },
+		beforeEnter: profileGuard,
 	},
 	{
 		path: "/",
@@ -34,15 +34,6 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory(),
 	routes,
-});
-
-router.beforeEach((to, from, next) => {
-	const userStore = useUserStore();
-	if ("auth" in to.meta && to.meta.auth && !userStore.isAuth) {
-		next("/login");
-	} else {
-		next();
-	}
 });
 
 export default router;

@@ -18,6 +18,11 @@ export default {
 		router,
 		HeaderComponent,
 	},
+	async created() {
+		const token = localStorage.getItem('authToken');
+		if (!token) return
+		await this.userStore.getUser();
+	}
 
 };
 </script>

@@ -2,31 +2,26 @@
 	<div class="header">
 		<div class="header__navbar">
 			<div class="header__navbar--container">
-				<img
+				<router-link to="/">
+					<img
 					src="../assets/images/blog-logo.svg"
 					alt="Logo"
 					class="header__navbar--logo"
-					@click.prevent="goToHome"
-				/>
-				<div v-if="userStore.isAuth">
+				/></router-link>
+				<div v-if="isAuth">
 					<div class="header__navbar--dropdown">
 						<div class="header__navbar--dropdown-dropbtn">
 							<img :src="logoIcon" alt="Dropdown" />
 						</div>
 						<div class="header__navbar--dropdown-content">
-							<a href="#" @click.prevent="goToProfile">Profile</a>
-							<a href="#" @click.prevent="logOut" >Log Out</a>
+							<router-link to="/profile">Profile</router-link>
+							<a href="#" @click.prevent="logOut"> Log Out</a>
 						</div>
 					</div>
 				</div>
-				<button
-					v-else
-					type="button"
-					class="header__navbar--login-button"
-					@click.prevent="logIn"
-				>
-					Log In
-				</button>
+			<router-link v-else :to="{ name: 'LoginView' }" class="header__navbar--login-button">
+				Log In
+			</router-link>
 			</div>
 		</div>
 	</div>
@@ -40,25 +35,18 @@ import { computed } from "vue";
 const userStore = useUserStore();
 const router = useRouter();
 
-const goToHome = () => {
-	router.push({ name: "HomeView" });
-};
 const logOut = () => {
 	userStore.logout();
 	router.push({ name: "HomeView" });
 };
-const goToProfile = () => {
-	router.push({ name: "ProfileView" })
-}
-const logIn = () => {
-	router.push({ name: "LoginView" })
-}
 
 const logoIcon = computed(() => {
-	return userStore.isAuth === true
+	return userStore.isAuth
 		? "./icons/header-logged-icon.svg"
 		: "./icons/header-unlogged-icon.svg";
 });
+
+const isAuth = computed(() => userStore.isAuth);
 </script>
 
 <style>
@@ -85,6 +73,7 @@ const logoIcon = computed(() => {
 	border-radius: 19px;
 	font-size: 18px;
 	background-color: var(--container-color);
+	text-decoration: none;
 
 	display: inline-block;
 	position: relative;
