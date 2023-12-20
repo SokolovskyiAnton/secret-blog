@@ -26,9 +26,6 @@
 				>
 					Log In
 				</router-link>
-				<!-- <router-link v-else :to="{ name: 'LoginView' }" class="header__navbar--login-button">
-				Log In
-			</router-link> -->
 			</div>
 		</div>
 	</div>
