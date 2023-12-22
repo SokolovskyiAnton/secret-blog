@@ -18,6 +18,7 @@
 	--red-color: rgb(231, 105, 105);
 	--header-color: #D97474;
 	--header-color-hover: #d66464;
+	--disabled-input-colot: rgb(137, 137, 160);
 }
 
 body {
@@ -69,6 +70,15 @@ body {
 .login-form__input-box {
 	margin: 22px 0;
 	display: flex;
+}
+
+.signup-form__input-box__fullName {
+	display: flex;
+}
+
+.signup-form__input-box-lastName,
+.signup-form__input-box-firstName {
+	margin-top: 22px;
 }
 
 .signup-form__input-field,

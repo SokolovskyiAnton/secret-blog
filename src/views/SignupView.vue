@@ -13,18 +13,32 @@
 				</span>
 			</div>
 			<div class="signup-form">
-				<div class="signup-form__input-box">
-					<input
-						type="text"
-						class="signup-form__input-field"
-						placeholder="Username"
-						v-model.trim="userName"
-						:class="{ errorBorder: v$.userName.$error }"
-					/>
+				<div class="signup-form__input-box__fullName">
+					<div class="signup-form__input-box-firstName">
+						<input
+							type="text"
+							class="signup-form__input-field"
+							placeholder="First name"
+							v-model.trim="firstName"
+							:class="{ errorBorder: v$.firstName.$error }"
+						/>
+					</div>
+					<span v-if="v$.firstName.$error" class="signup-form__error-span">
+						{{ v$.firstName.$errors[0].$message }}
+					</span>
+					<div class="signup-form__input-box-lastName">
+						<input
+							type="text"
+							class="signup-form__input-field"
+							placeholder="Last name"
+							v-model.trim="lastName"
+							:class="{ errorBorder: v$.lastName.$error }"
+						/>
+					</div>
+					<span v-if="v$.lastName.$error" class="signup-form__error-span">
+						{{ v$.lastName.$errors[0].$message }}
+					</span>
 				</div>
-				<span v-if="v$.userName.$error" class="signup-form__error-span">
-					{{ v$.userName.$errors[0].$message }}
-				</span>
 				<div class="signup-form__input-box">
 					<input
 						type="text"
@@ -94,7 +108,8 @@ export default {
 	},
 	data() {
 		return {
-			userName: "",
+			firstName: "",
+			lastName: "",
 			email: "",
 			password: "",
 			checked: "",
@@ -102,7 +117,8 @@ export default {
 	},
 	validations() {
 		return {
-			userName: { required, minLength: minLength(4) },
+			firstName: { required, minLength: minLength(4) },
+			lastName: { required, minLength: minLength(4) },
 			email: { required, email },
 			password: { required },
 			checked: { sameAs: sameAs(true) },
@@ -116,7 +132,12 @@ export default {
 					return;
 				}
 
-				await this.userStore.signup(this.email, this.password, this.userName);
+				await this.userStore.signup(
+					this.email,
+					this.password,
+					this.firstName,
+					this.lastName
+				);
 
 				this.$router.push({ name: "LoginView" });
 			} catch (error) {

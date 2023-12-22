@@ -1,26 +1,15 @@
 import { useUserStore } from "../stores/userStore";
 
-export const profileGuard = (to, from, next) => {
-	const userStore = useUserStore();
+// export const profileGuard = (to, from, next) => {
+// 	const userStore = useUserStore();
 
-	if (userStore.isAuth) {
-		next();
-	} else {
-		next("/");
-	}
-};
-export const loginGuard = (to, from, next) => {
-	const userStore = useUserStore();
-
-	if (userStore.isAuth) {
-		next(from);
-	} else if (to.name === "LoginView" && userStore.isAuth) {
-		next("/");
-	} else {
-		next();
-	}
-};
-export const signupGuard = (to, from, next) => {
+// 	if (userStore.isAuth) {
+// 		next();
+// 	} else {
+// 		next("/");
+// 	}
+// };
+export const loginSignupGuard = (to, from, next) => {
 	const userStore = useUserStore();
 
 	if (userStore.isAuth) {

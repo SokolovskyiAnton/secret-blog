@@ -16,6 +16,7 @@ export const useUserStore = defineStore("users", {
 					await api.post("/auth/", {
 						email,
 						password,
+						
 					})
 				).data.token;
 
@@ -24,20 +25,23 @@ export const useUserStore = defineStore("users", {
 				throw error;
 			}
 		},
-		async signup(email, password, name) {
+		async signup(email, password) {
 			try {
 				await api.post("/users/", {
 					email,
 					password,
-					name,
+					
 				});
 			} catch (error) {
 				throw error;
 			}
 		},
 		async getUser() {
-			this.user = await (api.get("/auth/user")).data;
+			const userData = (await api.get("/auth/user")).data;
+			console.log("userData:", userData);
+			this.user = userData;
 			this.isAuth = true;
+			
 		},
 		logout() {
 			this.isAuth = false;
