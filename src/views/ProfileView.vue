@@ -90,7 +90,6 @@ const userStore = useUserStore();
 const usersData = computed(() => {
 	return userStore.getUserData;
 });
-console.log(usersData);
 </script>
 
 <style>

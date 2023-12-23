@@ -19,24 +19,24 @@
 							type="text"
 							class="signup-form__input-field"
 							placeholder="First name"
-							v-model.trim="firstName"
-							:class="{ errorBorder: v$.firstName.$error }"
+							v-model.trim="form.firstName"
+							:class="{ errorBorder: v$.form.firstName.$error }"
 						/>
 					</div>
-					<span v-if="v$.firstName.$error" class="signup-form__error-span">
-						{{ v$.firstName.$errors[0].$message }}
+					<span v-if="v$.form.firstName.$error" class="signup-form__error-span">
+						{{ v$.form.firstName.$errors[0].$message }}
 					</span>
 					<div class="signup-form__input-box-lastName">
 						<input
 							type="text"
 							class="signup-form__input-field"
 							placeholder="Last name"
-							v-model.trim="lastName"
-							:class="{ errorBorder: v$.lastName.$error }"
+							v-model.trim="form.lastName"
+							:class="{ errorBorder: v$.form.lastName.$error }"
 						/>
 					</div>
-					<span v-if="v$.lastName.$error" class="signup-form__error-span">
-						{{ v$.lastName.$errors[0].$message }}
+					<span v-if="v$.form.lastName.$error" class="signup-form__error-span">
+						{{ v$.form.lastName.$errors[0].$message }}
 					</span>
 				</div>
 				<div class="signup-form__input-box">
@@ -44,24 +44,24 @@
 						type="text"
 						class="signup-form__input-field"
 						placeholder="Email"
-						v-model.trim="email"
-						:class="{ errorBorder: v$.email.$error }"
+						v-model.trim="form.email"
+						:class="{ errorBorder: v$.form.email.$error }"
 					/>
 				</div>
-				<span v-if="v$.email.$error" class="signup-form__error-span">
-					{{ v$.email.$errors[0].$message }}
+				<span v-if="v$.form.email.$error" class="signup-form__error-span">
+					{{ v$.form.email.$errors[0].$message }}
 				</span>
 				<div class="signup-form__input-box">
 					<input
 						type="password"
 						class="signup-form__input-field"
 						placeholder="Password"
-						v-model.trim="password"
-						:class="{ errorBorder: v$.password.$error }"
+						v-model.trim="form.password"
+						:class="{ errorBorder: v$.form.password.$error }"
 					/>
 				</div>
-				<span v-if="v$.password.$error" class="signup-form__error-span">
-					{{ v$.password.$errors[0].$message }}
+				<span v-if="v$.form.password.$error" class="signup-form__error-span">
+					{{ v$.form.password.$errors[0].$message }}
 				</span>
 				<div class="signup-form__button--arrow">
 					<button
@@ -101,26 +101,31 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import { useUserStore } from "@/stores/userStore";
-
+// ToDo Create notification service
+// ToDo Create loading button component
 export default {
 	setup() {
 		return { v$: useVuelidate(), userStore: useUserStore() };
 	},
 	data() {
 		return {
-			firstName: "",
-			lastName: "",
-			email: "",
-			password: "",
+			form: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+      },
 			checked: "",
 		};
 	},
 	validations() {
 		return {
-			firstName: { required, minLength: minLength(4) },
-			lastName: { required, minLength: minLength(4) },
-			email: { required, email },
-			password: { required },
+			form: {
+        firstName: { required, minLength: minLength(4) },
+        lastName: { required, minLength: minLength(4) },
+        email: { required, email },
+        password: { required },
+      },
 			checked: { sameAs: sameAs(true) },
 		};
 	},
@@ -133,10 +138,7 @@ export default {
 				}
 
 				await this.userStore.signup(
-					this.email,
-					this.password,
-					this.firstName,
-					this.lastName
+					this.form
 				);
 
 				this.$router.push({ name: "LoginView" });

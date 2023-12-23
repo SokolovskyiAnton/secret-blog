@@ -5,13 +5,12 @@
 
 <script>
 import router from "./router";
-import { useVuelidate } from "@vuelidate/core";
 import HeaderComponent from "./components/HeaderComponent.vue";
 import { useUserStore } from "./stores/userStore";
 
 export default {
 	setup() {
-		return { v$: useVuelidate(), userStore: useUserStore() };
+		return { userStore: useUserStore() };
 	},
 	name: "App",
 	components: {
@@ -23,7 +22,6 @@ export default {
 		if (!token) return
 		await this.userStore.getUser();
 	}
-
 };
 </script>
 

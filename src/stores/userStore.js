@@ -25,23 +25,20 @@ export const useUserStore = defineStore("users", {
 				throw error;
 			}
 		},
-		async signup(email, password) {
+		async signup(form) {
 			try {
-				await api.post("/users/", {
-					email,
-					password,
-					
-				});
+				await api.post("/users/", form);
 			} catch (error) {
 				throw error;
 			}
 		},
 		async getUser() {
-			const userData = (await api.get("/auth/user")).data;
-			console.log("userData:", userData);
-			this.user = userData;
-			this.isAuth = true;
-			
+			try {
+				this.user = (await api.get("/auth/user")).data;
+				this.isAuth = true;
+			} catch (error) {
+				throw error;
+			}
 		},
 		logout() {
 			this.isAuth = false;
