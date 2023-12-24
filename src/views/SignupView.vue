@@ -14,30 +14,40 @@
 			</div>
 			<div class="signup-form">
 				<div class="signup-form__input-box__fullName">
-					<div class="signup-form__input-box-firstName">
-						<input
-							type="text"
-							class="signup-form__input-field"
-							placeholder="First name"
-							v-model.trim="form.firstName"
-							:class="{ errorBorder: v$.form.firstName.$error }"
-						/>
+					<div class="signup-form__input-box-firstName-content">
+						<div class="signup-form__input-box-firstName">
+							<input
+								type="text"
+								class="signup-form__input-field"
+								placeholder="First name"
+								v-model.trim="form.firstName"
+								:class="{ errorBorder: v$.form.firstName.$error }"
+							/>
+						</div>
+						<span
+							v-if="v$.form.firstName.$error"
+							class="signup-form__error-span"
+						>
+							{{ v$.form.firstName.$errors[0].$message }}
+						</span>
 					</div>
-					<span v-if="v$.form.firstName.$error" class="signup-form__error-span">
-						{{ v$.form.firstName.$errors[0].$message }}
-					</span>
-					<div class="signup-form__input-box-lastName">
-						<input
-							type="text"
-							class="signup-form__input-field"
-							placeholder="Last name"
-							v-model.trim="form.lastName"
-							:class="{ errorBorder: v$.form.lastName.$error }"
-						/>
+					<div class="signup-form__input-box-lastName-content">
+						<div class="signup-form__input-box-lastName">
+							<input
+								type="text"
+								class="signup-form__input-field"
+								placeholder="Last name"
+								v-model.trim="form.lastName"
+								:class="{ errorBorder: v$.form.lastName.$error }"
+							/>
+						</div>
+						<span
+							v-if="v$.form.lastName.$error"
+							class="signup-form__error-span"
+						>
+							{{ v$.form.lastName.$errors[0].$message }}
+						</span>
 					</div>
-					<span v-if="v$.form.lastName.$error" class="signup-form__error-span">
-						{{ v$.form.lastName.$errors[0].$message }}
-					</span>
 				</div>
 				<div class="signup-form__input-box">
 					<input
@@ -110,22 +120,22 @@ export default {
 	data() {
 		return {
 			form: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-      },
+				firstName: "",
+				lastName: "",
+				email: "",
+				password: "",
+			},
 			checked: "",
 		};
 	},
 	validations() {
 		return {
 			form: {
-        firstName: { required, minLength: minLength(4) },
-        lastName: { required, minLength: minLength(4) },
-        email: { required, email },
-        password: { required },
-      },
+				firstName: { required, minLength: minLength(4) },
+				lastName: { required, minLength: minLength(4) },
+				email: { required, email },
+				password: { required },
+			},
 			checked: { sameAs: sameAs(true) },
 		};
 	},
@@ -137,9 +147,7 @@ export default {
 					return;
 				}
 
-				await this.userStore.signup(
-					this.form
-				);
+				await this.userStore.signup(this.form);
 
 				this.$router.push({ name: "LoginView" });
 			} catch (error) {

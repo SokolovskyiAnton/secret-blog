@@ -25,6 +25,7 @@
 						placeholder="Password"
 						v-model.trim="password"
 						:class="{ errorBorder: v$.password.$error }"
+						@keyup.enter="handleSubmit"
 					/>
 				</div>
 				<span v-if="v$.password.$error" class="login-form__error-span">

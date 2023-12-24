@@ -1,10 +1,12 @@
 <template>
+	<div class="container">
 	<div class="post-wrapper">
 		<PostComponent
 			v-for="post in postsData"
 			:key="post.id"
 			:post="post"
 		></PostComponent>
+	</div>
 	</div>
 </template>
 
@@ -25,6 +27,10 @@ const postsData = computed(() => postStore.getPosts);
 </script>
 
 <style>
+.container {
+	
+}
+
 .home-title {
 	display: flex;
 	justify-content: center;

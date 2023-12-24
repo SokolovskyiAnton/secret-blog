@@ -6,6 +6,12 @@
 				src="../assets/images/user-icon.svg"
 				alt="User photo"
 			/>
+			<input
+				type="file"
+				ref="file"
+				class="profile-form__edit-icon"
+				@click.prevent="handleFileUpload"
+			/>
 
 			<form class="profile-form__user-data">
 				<div class="profile-form__user-details">
@@ -16,6 +22,7 @@
 						class="profile-form__user-input"
 						type="text"
 						v-model="usersData.nickname"
+						@keyup="handleInput"
 					/>
 				</div>
 				<div class="profile-form__user-fullName">
@@ -47,7 +54,8 @@
 					<input
 						class="profile-form__user-input"
 						type="text"
-						v-model="usersData.email"
+						v-model="form.email"
+						@keyup="handleInput"
 					/>
 				</div>
 				<div class="profile-form__user-details">
@@ -56,6 +64,7 @@
 						class="profile-form__user-input"
 						type="text"
 						v-model="usersData.profession"
+						@keyup="handleInput"
 					/>
 				</div>
 
@@ -65,10 +74,14 @@
 						class="profile-form__user-input"
 						type="text"
 						v-model="usersData.skills"
+						@keyup="handleInput"
 					/>
 				</div>
 
-				<div class="profile-form__buttons">
+				<div
+					class="profile-form__buttons"
+					:class="{ invisibleButtons: !hasChanges }"
+				>
 					<button type="button" class="profile-form__cancel-button">
 						Cancel
 					</button>
@@ -80,19 +93,57 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useUserStore } from "../stores/userStore";
 
 const userStore = useUserStore();
 
-
-
 const usersData = computed(() => {
 	return userStore.getUserData;
 });
+
+const hasChanges = ref(false);
+
+const form = ref({
+	email: "",
+	nickname: "",
+	profession: "",
+	skills: "",
+});
+
+onMounted(async () => {
+	const response = await userStore.getUserData;
+	form.value = response;
+	console.log(response);
+});
+
+const handleFileUpload = () => {};
+
+// const handleInput = () => {
+// 	if (usersData.email === "" && usersData.nickname === ""
+// 		&& usersData.profession === "" && usersData.skills === "") {
+// 		console.log(usersData.profession);
+// 		hasChanges.value = false;
+// 	} else {
+// 		hasChanges.value = true;
+// 	}
+
+// }
 </script>
 
 <style>
+.profile-form__edit-icon {
+	padding-left: 30px;
+	background-image: url("../assets/images/edit-icon.svg");
+	background-repeat: no-repeat;
+	background-position: 10px center; 
+	background-size: 20px;
+}
+
+.invisibleButtons {
+	visibility: hidden;
+}
+
 .profile-form__wrapper {
 	display: flex;
 	justify-content: center;
@@ -116,7 +167,7 @@ const usersData = computed(() => {
 
 .profile-form__user-fullName {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .profile-form__user-input-disabled {
@@ -177,9 +228,8 @@ const usersData = computed(() => {
 
 @media (max-width: 768px) {
 	.profile-form__user-data {
-		
 	}
-	.profile-form__user-fullName{
+	.profile-form__user-fullName {
 		display: flex;
 		flex-direction: column;
 		box-sizing: border-box;
