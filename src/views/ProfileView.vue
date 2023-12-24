@@ -1,4 +1,5 @@
 <template>
+	<div class="container">
 	<div class="profile-form__wrapper">
 		<div class="profile-form__content">
 			<img
@@ -90,6 +91,7 @@
 			</form>
 		</div>
 	</div>
+	</div>
 </template>
 
 <script setup>
@@ -133,36 +135,33 @@ const handleFileUpload = () => {};
 
 <style>
 .profile-form__edit-icon {
-	padding-left: 30px;
+	padding-left: 28px;
 	background-image: url("../assets/images/edit-icon.svg");
 	background-repeat: no-repeat;
-	background-position: 10px center; 
-	background-size: 20px;
+	background-position: 4px center; 
+	background-size: 24px;
 }
 
 .invisibleButtons {
-	visibility: hidden;
+	/* visibility: hidden; */
 }
 
 .profile-form__wrapper {
 	display: flex;
 	justify-content: center;
-	text-align: center;
-	margin-top: 5%;
-	/* border: 2px solid black; */
-	margin: 5% 10%;
+	margin-top: 16px;
 }
 
 .profile-form__user-icon {
 	width: 200px;
-	height: 250px;
+	height: 260px;
 }
 
 .profile-form__user-details {
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	margin-bottom: 20px;
+	margin-bottom: 16px;
 }
 
 .profile-form__user-fullName {
@@ -171,44 +170,40 @@ const handleFileUpload = () => {};
 }
 
 .profile-form__user-input-disabled {
-	font-size: 18px;
-	padding: 10px;
-	border-radius: 10px;
+	padding: 12px;
+	border-radius: 12px;
 	color: rgb(137, 137, 160);
 	background-color: #91b9ce12;
 }
 .profile-form__user-input {
-	font-size: 18px;
-	padding: 10px;
-	border-radius: 10px;
+	padding: 12px;
+	border-radius: 12px;
 	background-color: #91b9ce12;
 	border: 2px solid rgb(190, 184, 184);
 	width: 100%;
 }
 
 .profile-form__user-label {
-	font-size: 20px;
+	font-size: 24px;
 }
 
 .profile-form__cancel-button {
-	font-size: 18px;
 	font-weight: bold;
 	color: rgb(107, 142, 201);
-	height: 44px;
-	padding: 0 30px;
-	border-radius: 20px;
+	height: 48px;
+	padding: 0 24px;
+	border-radius: 24px;
 	border: 2px solid rgb(107, 142, 201);
 	background-color: transparent;
 	box-sizing: border-box;
 }
 
 .profile-form__save-button {
-	font-size: 18px;
 	font-weight: bold;
 	color: rgb(97, 169, 97);
-	height: 44px;
-	padding: 0 40px;
-	border-radius: 20px;
+	height: 48px;
+	padding: 0 24px;
+	border-radius: 24px;
 	border: 2px solid rgb(97, 169, 97);
 	background-color: transparent;
 	box-sizing: border-box;
@@ -216,14 +211,14 @@ const handleFileUpload = () => {};
 
 .profile-form__cancel-button:hover {
 	cursor: pointer;
-	color: blue;
-	border: 2px solid blue;
+	color: var(--profile-cancel-button-color);
+	border: 2px solid var(--profile-cancel-button-color);
 }
 
 .profile-form__save-button:hover {
 	cursor: pointer;
-	color: green;
-	border: 2px solid green;
+	color: var(--profile-save-button-color);
+	border: 2px solid var(--profile-save-button-color);
 }
 
 @media (max-width: 768px) {

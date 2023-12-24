@@ -25,4 +25,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@font-face {
+	font-family: "Open Sans";
+	src: url("../src/fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf");
+}
+</style>

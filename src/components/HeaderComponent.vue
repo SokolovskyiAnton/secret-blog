@@ -1,7 +1,8 @@
 <template>
 	<div class="header">
+		<div class="container">
 		<div class="header__navbar">
-			<div class="header__navbar--container">
+			<div class="header__navbar--content">
 				<router-link to="/">
 					<img
 						src="../assets/images/blog-logo.svg"
@@ -27,6 +28,7 @@
 					Log In
 				</router-link>
 			</div>
+		</div>
 		</div>
 	</div>
 </template>
@@ -59,17 +61,21 @@ const isLoggedIn = computed(() => {
 </script>
 
 <style>
-.header__navbar--container {
+
+.header {
+	background-color: var(--header-color);
+}
+
+.header__navbar--content {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 15px;
 }
 
 .header__navbar--logo {
-	width: 60px;
-	height: 70px;
-	padding: 10px 0;
+	width: 64px;
+	height: 76px;
+	padding: 12px 0;
 }
 
 .header__navbar--logo:hover {
@@ -77,9 +83,9 @@ const isLoggedIn = computed(() => {
 }
 
 .header__navbar--login-button {
-	padding: 8px 20px;
+	padding: 8px 24px;
 	border: none;
-	border-radius: 19px;
+	border-radius: 24px;
 	font-size: 18px;
 	background-color: var(--container-color);
 	text-decoration: none;
@@ -100,13 +106,13 @@ const isLoggedIn = computed(() => {
 
 .header__navbar--login-button:hover {
 	cursor: pointer;
-	padding-right: 30px;
-	padding-left: 10px;
+	padding-right: 36px;
+	padding-left: 14px;
 }
 
 .header__navbar--login-button:hover:after {
 	opacity: 1;
-	right: 10px;
+	right: 12px;
 }
 
 .header__navbar--dropdown-dropbtn {
@@ -126,19 +132,20 @@ const isLoggedIn = computed(() => {
 	min-width: 104px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
-	border-radius: 5px;
+	border-radius: 8px;
 	right: 0;
 }
 
 .header__navbar--dropdown-content a {
 	color: var(--text-color);
-	padding: 12px 16px;
+	padding: 12px 14px;
 	text-decoration: none;
 	display: block;
 }
 
 .header__navbar--dropdown-content a:hover {
 	background-color: #f1f1f1;
+	border-radius: 8px;
 }
 
 .header__navbar--dropdown:hover .header__navbar--dropdown-content {

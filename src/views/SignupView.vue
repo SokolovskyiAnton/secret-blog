@@ -13,7 +13,7 @@
 				</span>
 			</div>
 			<div class="signup-form">
-				<div class="signup-form__input-box__fullName">
+				<div class="signup-form__input-box__fullName signup-form__input-box">
 					<div class="signup-form__input-box-firstName-content">
 						<div class="signup-form__input-box-firstName">
 							<input
@@ -157,3 +157,168 @@ export default {
 	},
 };
 </script>
+
+<style>
+
+.signup-header__title {
+	color: var(--title-color);
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.signup-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	min-height: 100vh;
+	background: var(--background-gradient);
+}
+
+.signup-container {
+	border: none;
+	border-radius: 24px;
+	padding: 72px 96px 96px;
+	background-color: var(--container-color);
+}
+
+.signup-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.signup-form__input-box {
+	margin: 24px 0;
+	display: flex;
+}
+
+.signup-form__input-box__fullName {
+	display: flex;
+}
+
+.signup-form__input-box-lastName,
+.signup-form__input-box-firstName {
+	margin: 24px 0;
+}
+
+.signup-form__input-field,
+.signup-form__button {
+	width: 100%;
+	height: 46px;
+	padding: 0 12px;
+	border-radius: 12px;
+	border: none;
+	background-color: var(--input-background-color);
+	box-sizing: border-box;
+}
+
+.signup-form__button--blue {
+	background-color: var(--blue-color);
+	color: var(--container-color);
+	font-size: 18px;
+}
+
+.signup-form__button--arrow {
+	position: relative;
+	margin-top: 16px;
+}
+
+.signup-form__button--arrow:hover,
+.signup-form__button--blue:hover {
+	cursor: pointer;
+}
+
+.signup-form__button--arrow-right-icon {
+	width: 46px;
+    height: 56px;
+    position: absolute;
+    top: -4px;
+    left: -12px;
+}
+
+.signup-footer__checkbox-terms {
+	margin-right: 4px;
+}
+
+.signup-footer__checkbox-terms:hover {
+	cursor: pointer;
+}
+
+input:placeholder-shown {
+	font-style: italic;
+}
+
+/* .signup-form__input-box--first-last-name-input {
+	display: flex;
+	justify-content: center;
+} */
+
+.signup-form__input-box--first-last-name-input div {
+	/* width: 50%; */
+}
+
+
+.signup-footer__terms-of-service {
+	color: var(--blue-color);
+}
+
+.signup-header__plain-link {
+	text-decoration: none;
+	color: var(--blue-color);
+	cursor: pointer;
+}
+
+.signup-form__error-span {
+	color: var(--red-color);
+	font-size: 16px;
+	display: flex;
+	margin-top: -16px;
+}
+
+.signup-form__error-span--first-last-name {
+	margin-top: 4px;
+}
+
+.signup-form__error-span-last-first-name {
+	display: flex;
+	justify-content: space-around;
+}
+
+.errorBorder {
+	border: 1px solid var(--red-color);
+}
+
+@media (max-width: 375px) {
+	.signup-form__input-box--first-last-name-input {
+		display: flex;
+		flex-direction: column;
+	}
+	.signup-form__input-field--firstname-input {
+		margin-bottom: 22px;
+	}
+	.signup-form__input-box--first-last-name-input div {
+		width: auto;
+	}
+}
+
+@media (max-width: 425px) {
+	.arrow-right-icon {
+		visibility: hidden;
+	}
+	.signup-form__checkbox-terms-agree {
+		display: flex;
+		flex-direction: column;
+	}
+	.signup-container {
+		padding: 36px;
+	}
+}
+
+@media (max-width: 768px) {
+	.signup-wrapper {
+		width: 100%;
+		height: 100%;
+	}
+}
+</style>

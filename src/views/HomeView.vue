@@ -27,9 +27,6 @@ const postsData = computed(() => postStore.getPosts);
 </script>
 
 <style>
-.container {
-	
-}
 
 .home-title {
 	display: flex;
