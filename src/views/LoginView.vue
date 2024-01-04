@@ -1,15 +1,15 @@
 <template>
-	<div class="login-wrapper">
-		<div class="login-container">
-			<div class="login-header">
-				<h1 class="login-header__title">Log In</h1>
+	<div class="login">
+		<div class="login__login-content">
+			<div class="login__login-content__login-header">
+				<h1 class="login__login-content__login-header__title">Log In</h1>
 			</div>
-			<div class="login-form">
-				<div class="login-form__input-box">
+			<div class="login__login-content__login-form">
+				<div class="login__login-content__login-form__input-box">
 					<input
 						autofill
 						type="text"
-						class="login-form__input-field"
+						class="login__login-content__login-form__input-box__input-field"
 						placeholder="Email"
 						v-model.trim="email"
 						:class="{ errorBorder: v$.email.$error }"
@@ -18,10 +18,10 @@
 				<span v-if="v$.email.$error" class="login-form__error-span">
 					{{ v$.email.$errors[0].$message }}
 				</span>
-				<div class="login-form__input-box">
+				<div class="login__login-content__login-form__input-box">
 					<input
 						type="password"
-						class="login-form__input-field"
+						class="login__login-content__login-form__input-box__input-field"
 						placeholder="Password"
 						v-model.trim="password"
 						:class="{ errorBorder: v$.password.$error }"
@@ -91,7 +91,6 @@ export default {
 				await this.userStore.getUser();
 
 				this.$router.push({ name: "HomeView" });
-
 			} catch (error) {
 				console.log("The user does not exist!");
 			}
@@ -100,41 +99,89 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+%login-inputs-styles {
+	&__input-box {
+		margin: 24px 0;
+		display: flex;
 
-.login-header__title {
-	color: var(--title-color);
-	font-size: 36px;
-	font-weight: bold;
+		&__input-field {
+			width: 100%;
+			height: 46px;
+			padding: 0 12px;
+			border-radius: 12px;
+			border: none;
+			background-color: var(--input-background-color);
+			box-sizing: border-box;
+		}
+	}
 }
 
-.login-wrapper {
+.login {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	min-height: 100vh;
 	background: var(--background-gradient);
+
+	&__login-content {
+		border: none;
+		border-radius: 24px;
+		padding: 72px 96px 96px;
+		background-color: var(--content-color);
+
+		&__login-header {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			&__title {
+				color: var(--title-color);
+				font-size: 36px;
+				font-weight: bold;
+			}
+		}
+
+		&__login-form {
+			@extend %login-inputs-styles;
+			
+		}
+	}
 }
 
+// .login-header__title {
+// 	color: var(--title-color);
+// 	font-size: 36px;
+// 	font-weight: bold;
+// }
 
-.login-container {
-	border: none;
-	border-radius: 24px;
-	padding: 72px 96px 96px;
-	background-color: var(--container-color);
-}
+// .login {
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	width: 100%;
+// 	min-height: 100vh;
+// 	background: var(--background-gradient);
+// }
 
-.login-header {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
+// .login-content {
+// 	border: none;
+// 	border-radius: 24px;
+// 	padding: 72px 96px 96px;
+// 	background-color: var(--content-color);
+// }
 
-.login-form__input-box {
-	margin: 24px 0;
-	display: flex;
-}
+// .login-header {
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// }
+
+// .login-form__input-box {
+// 	margin: 24px 0;
+// 	display: flex;
+// }
 
 .login-form__input-field,
 .login-form__button {
@@ -149,7 +196,7 @@ export default {
 
 .login-form__button--blue {
 	background-color: var(--blue-color);
-	color: var(--container-color);
+	color: var(--content-color);
 }
 
 .login-form__button {
@@ -190,18 +237,16 @@ input:placeholder-shown {
 	border: 1px solid var(--red-color);
 }
 
-
 @media (max-width: 425px) {
-	.login-container {
+	.login-content {
 		padding: 32px;
 	}
 }
 
 @media (max-width: 768px) {
-	.login-wrapper {
+	.login {
 		width: 100%;
 		height: 100%;
 	}
 }
-
 </style>

@@ -13,7 +13,7 @@
 				</span>
 			</div>
 			<div class="signup-form">
-				<div class="signup-form__input-box__fullName signup-form__input-box">
+				<div class="signup-form__input-box__fullName">
 					<div class="signup-form__input-box-firstName-content">
 						<div class="signup-form__input-box-firstName">
 							<input
@@ -179,7 +179,7 @@ export default {
 	border: none;
 	border-radius: 24px;
 	padding: 72px 96px 96px;
-	background-color: var(--container-color);
+	background-color: var(--content-color);
 }
 
 .signup-header {
@@ -215,7 +215,7 @@ export default {
 
 .signup-form__button--blue {
 	background-color: var(--blue-color);
-	color: var(--container-color);
+	color: var(--content-color);
 	font-size: 18px;
 }
 
@@ -247,15 +247,6 @@ export default {
 
 input:placeholder-shown {
 	font-style: italic;
-}
-
-/* .signup-form__input-box--first-last-name-input {
-	display: flex;
-	justify-content: center;
-} */
-
-.signup-form__input-box--first-last-name-input div {
-	/* width: 50%; */
 }
 
 

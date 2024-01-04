@@ -7,7 +7,7 @@ export const useUserStore = defineStore("users", {
 		isAuth: false,
 	}),
 	getters: {
-		getUserData: (state) => state.user
+		getUserData: (state) => state.user,
 	},
 	actions: {
 		async login(email, password) {
@@ -16,7 +16,6 @@ export const useUserStore = defineStore("users", {
 					await api.post("/auth/", {
 						email,
 						password,
-						
 					})
 				).data.token;
 
@@ -32,7 +31,7 @@ export const useUserStore = defineStore("users", {
 				throw error;
 			}
 		},
-		async getUser() {
+		async getUser() {;
 			try {
 				this.user = (await api.get("/auth/user")).data;
 				this.isAuth = true;
@@ -43,9 +42,6 @@ export const useUserStore = defineStore("users", {
 		logout() {
 			this.isAuth = false;
 			localStorage.removeItem("authToken");
-		}
+		},
 	},
 });
-
-
-

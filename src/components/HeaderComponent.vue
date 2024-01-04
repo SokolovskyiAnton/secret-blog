@@ -12,7 +12,11 @@
 					<div v-if="isAuth" class="header__navbar__content__isAuth">
 						<div class="header__navbar__content__isAuth__dropdown">
 							<div class="header__navbar__content__isAuth__dropdown__dropbtn">
-								<img :src="logoIcon" alt="Dropdown" />
+								<img
+									:src="logoIcon"
+									alt="Dropdown"
+									class="header__navbar__content__isAuth__dropdown__dropbtn__logo-icon"
+								/>
 							</div>
 							<div class="header__navbar__content__isAuth__dropdown__content">
 								<router-link to="/profile">Profile</router-link>
@@ -46,9 +50,11 @@ const logOut = () => {
 	router.push({ name: "HomeView" });
 };
 
+const user = computed(() => userStore.getUserData);
+
 const logoIcon = computed(() => {
-	return userStore.isAuth
-		? "./icons/header-logged-icon.svg"
+	return userStore.isAuth && user.value?.avatar
+		? user.value.avatar
 		: "./icons/header-unlogged-icon.svg";
 });
 
@@ -92,6 +98,13 @@ const isLoggedIn = computed(() => {
 						&:hover {
 							background-color: var(--header-color-hover);
 						}
+
+						&__logo-icon {
+							width: 60px;
+							height: 60px;
+							border-radius: 50%;
+							object-fit: cover;
+						}
 					}
 
 					&:hover &__content {
@@ -105,6 +118,7 @@ const isLoggedIn = computed(() => {
 						min-width: 104px;
 						box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 						border-radius: 8px;
+						z-index: 10;
 						right: 0;
 						transition: opacity 0.2s ease-in-out;
 
@@ -149,7 +163,7 @@ const isLoggedIn = computed(() => {
 					padding-right: 36px;
 					padding-left: 14px;
 				}
-				
+
 				&:hover {
 					&::after {
 						opacity: 1;

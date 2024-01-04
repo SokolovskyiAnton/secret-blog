@@ -18,10 +18,13 @@ export default {
 		HeaderComponent,
 	},
 	async created() {
-		const token = localStorage.getItem('authToken');
-		if (!token) return
-		await this.userStore.getUser();
-	}
+		const token = localStorage.getItem("authToken");
+		if (!token) return;
+
+		const userExists = Object.values(this.userStore.getUserData)?.length > 0;
+
+		if (!userExists) await this.userStore.getUser();
+	},
 };
 </script>
 

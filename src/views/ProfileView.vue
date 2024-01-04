@@ -5,7 +5,7 @@
 				<div class="profile-form__content__avatar-box">
 					<img
 						class="profile-form__content__avatar-box__avatar-image"
-						:src="prorfilePictureUrl ? prorfilePictureUrl : '../assets/images/default-user-icon.svg'"
+						:src="form.avatar ? form.avatar : './icons/default-user-icon.svg'"
 						alt="User photo"
 					/>
 					<div class="profile-form__content__avatar-box__edit-image">
@@ -32,8 +32,7 @@
 						<input
 							class="profile-form__content__user-data__user-details__user-input"
 							type="text"
-							v-model="usersData.nickname"
-							@keyup="handleInput"
+							v-model="form.nickname"
 						/>
 					</div>
 					<div class="profile-form__content__user-data__user-fullName">
@@ -49,7 +48,7 @@
 								disabled="disabled"
 								class="profile-form__content__user-data__user-fullName__user-details__user-input-disabled"
 								type="text"
-								v-model="usersData.firstName"
+								v-model="form.firstName"
 							/>
 						</div>
 						<div class="profile-form__content__user-data__user-details">
@@ -62,7 +61,7 @@
 								disabled="disabled"
 								class="profile-form__user-input-disabled"
 								type="text"
-								v-model="usersData.lastName"
+								v-model="form.lastName"
 							/>
 						</div>
 					</div>
@@ -76,7 +75,6 @@
 							class="profile-form__content__user-data__user-details__user-input"
 							type="text"
 							v-model="form.email"
-							@keyup="handleInput"
 						/>
 					</div>
 					<div class="profile-form__content__user-data__user-details">
@@ -88,8 +86,7 @@
 						<input
 							class="profile-form__user-input"
 							type="text"
-							v-model="usersData.profession"
-							@keyup="handleInput"
+							v-model="form.profession"
 						/>
 					</div>
 
@@ -102,24 +99,26 @@
 						<input
 							class="profile-form__user-input"
 							type="text"
-							v-model="usersData.skills"
-							@keyup="handleInput"
+							v-model="form.skills"
 						/>
 					</div>
 
-					<div
-						class="profile-form__content__user-data__buttons"
-						:class="{ invisibleButtons: !hasChanges }"
-					>
+					<div class="profile-form__content__user-data__buttons">
 						<button
 							type="button"
 							class="profile-form__content__user-data__buttons__cancel-button"
+							:disabled="!isDisabled"
+							:class="{ disabledButton: !isDisabled }"
+							@click.prevent="cancelChangedData"
 						>
 							Cancel
 						</button>
 						<button
 							type="button"
 							class="profile-form__content__user-data__buttons__save-button"
+							:class="{ disabledButton: !isDisabled }"
+							:disabled="!isDisabled"
+							@click.prevent="saveData"
 						>
 							Save
 						</button>
@@ -135,14 +134,11 @@ import { onMounted, ref, computed } from "vue";
 import { useUserStore } from "../stores/userStore";
 import api from "../api";
 
-
 const userStore = useUserStore();
 
 const usersData = computed(() => {
 	return userStore.getUserData;
 });
-
-const hasChanges = ref(false);
 
 const form = ref({
 	email: "",
@@ -152,33 +148,49 @@ const form = ref({
 	avatar: "",
 });
 
-onMounted(async () => {
-	const response = await userStore.getUserData;
-	form.value = response;
-	console.log(response);
-});
-
 const imageInput = ref(null);
 
 const openImageInput = () => {
 	imageInput.value.click();
 };
 
-const prorfilePictureUrl = ref(null);
-
 const handleImageChange = async (event) => {
 	const file = event.target.files[0];
-	prorfilePictureUrl.value = URL.createObjectURL(file);
+	form.value.avatar = URL.createObjectURL(file);
 
 	const formData = new FormData();
-	formData.append('profileImage', file);
+	formData.append("file", file);
 
-	const response = await api.post('uploadImage', formData);
-	
-
-
-
+	await api.put(`/users/upload/${form.value._id}`, formData);
 };
+
+const updatedForm = ref(null);
+
+const isDisabled = computed(() => {
+	if (!updatedForm.value) return;
+	return Object.keys(form.value).some((field) => {
+		return form.value[field] !== updatedForm.value[field];
+	});
+});
+
+const saveData = async () => {
+	const updatedData = await api.patch(`/users/${form.value._id}`, form.value);
+
+	userStore.state = updatedData;
+};
+
+const cancelChangedData = () => {
+	form.value = { ...usersData.value };
+};
+
+onMounted(async () => {
+	const userExists = Object.values(usersData?.value)?.length > 0;
+
+	if (!userExists) await userStore.getUser();
+
+	form.value = { ...usersData.value };
+	updatedForm.value = { ...usersData.value };
+});
 </script>
 
 <style lang="scss">
@@ -205,7 +217,7 @@ const handleImageChange = async (event) => {
 	display: flex;
 	justify-content: center;
 	margin-top: 16px;
-	position: realtive;
+	position: relative;
 
 	&__content {
 		&__avatar-box {
@@ -224,7 +236,7 @@ const handleImageChange = async (event) => {
 			&__edit-image {
 				position: absolute;
 				right: 148px;
-    			top: 168px;
+				top: 168px;
 
 				&__icon {
 					padding-left: 28px;
@@ -275,7 +287,7 @@ const handleImageChange = async (event) => {
 					background-color: transparent;
 					box-sizing: border-box;
 
-					&:hover {
+					&:hover:enabled {
 						cursor: pointer;
 						color: var(--profile-cancel-button-color);
 						border: 2px solid var(--profile-cancel-button-color);
@@ -291,7 +303,7 @@ const handleImageChange = async (event) => {
 					background-color: transparent;
 					box-sizing: border-box;
 
-					&:hover {
+					&:hover:enabled {
 						cursor: pointer;
 						color: var(--profile-save-button-color);
 						border: 2px solid var(--profile-save-button-color);
@@ -300,6 +312,11 @@ const handleImageChange = async (event) => {
 			}
 		}
 	}
+}
+
+.disabledButton {
+	color: rgb(190, 184, 184);
+	border: 2px solid rgb(190, 184, 184);
 }
 
 @media (max-width: 768px) {
