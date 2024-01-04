@@ -1,34 +1,34 @@
 <template>
 	<div class="header">
 		<div class="container">
-		<div class="header__navbar">
-			<div class="header__navbar--content">
-				<router-link to="/">
-					<img
-						src="../assets/images/blog-logo.svg"
-						alt="Logo"
-						class="header__navbar--logo"
-				/></router-link>
-				<div v-if="isAuth">
-					<div class="header__navbar--dropdown">
-						<div class="header__navbar--dropdown-dropbtn">
-							<img :src="logoIcon" alt="Dropdown" />
-						</div>
-						<div class="header__navbar--dropdown-content">
-							<router-link to="/profile">Profile</router-link>
-							<a href="#" @click.prevent="logOut"> Log Out</a>
+			<div class="header__navbar">
+				<div class="header__navbar__content">
+					<router-link to="/" class="header__navbar__content__router-link">
+						<img
+							src="../assets/images/blog-logo.svg"
+							alt="Logo"
+							class="header__navbar__content__router-link__logo"
+					/></router-link>
+					<div v-if="isAuth" class="header__navbar__content__isAuth">
+						<div class="header__navbar__content__isAuth__dropdown">
+							<div class="header__navbar__content__isAuth__dropdown__dropbtn">
+								<img :src="logoIcon" alt="Dropdown" />
+							</div>
+							<div class="header__navbar__content__isAuth__dropdown__content">
+								<router-link to="/profile">Profile</router-link>
+								<a href="#" @click.prevent="logOut"> Log Out</a>
+							</div>
 						</div>
 					</div>
+					<router-link
+						v-else-if="!isLoggedIn"
+						:to="{ name: 'LoginView' }"
+						class="header__navbar__content__loginButton"
+					>
+						Log In
+					</router-link>
 				</div>
-				<router-link
-					v-else-if="!isLoggedIn"
-					:to="{ name: 'LoginView' }"
-					class="header__navbar--login-button"
-				>
-					Log In
-				</router-link>
 			</div>
-		</div>
 		</div>
 	</div>
 </template>
@@ -57,102 +57,107 @@ const isAuth = computed(() => userStore.isAuth);
 const isLoggedIn = computed(() => {
 	return router.currentRoute.value.name === "LoginView" || userStore.isAuth;
 });
-
 </script>
 
-<style>
-
+<style lang="scss">
 .header {
 	background-color: var(--header-color);
-}
+	&__navbar {
+		&__content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 
-.header__navbar--content {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+			&__router-link {
+				&__logo {
+					width: 64px;
+					height: 76px;
+					padding: 12px 0;
 
-.header__navbar--logo {
-	width: 64px;
-	height: 76px;
-	padding: 12px 0;
-}
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
 
-.header__navbar--logo:hover {
-	cursor: pointer;
-}
+			&__isAuth {
+				&__dropdown {
+					position: relative;
+					display: inline-block;
 
-.header__navbar--login-button {
-	padding: 8px 24px;
-	border: none;
-	border-radius: 24px;
-	font-size: 18px;
-	background-color: var(--container-color);
-	text-decoration: none;
+					&__dropbtn {
+						background-color: var(--header-color);
+						cursor: pointer;
 
-	display: inline-block;
-	position: relative;
-	transition: 0.5s;
-}
+						&:hover {
+							background-color: var(--header-color-hover);
+						}
+					}
 
-.header__navbar--login-button:after {
-	content: url("../src/assets/images/black-arrow.svg");
-	position: absolute;
-	opacity: 0;
-	top: 12px;
-	right: -10px;
-	transition: 0.5s;
-}
+					&:hover &__content {
+						display: block;
+					}
 
-.header__navbar--login-button:hover {
-	cursor: pointer;
-	padding-right: 36px;
-	padding-left: 14px;
-}
+					&__content {
+						display: none;
+						position: absolute;
+						background-color: #f9f9f9;
+						min-width: 104px;
+						box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+						border-radius: 8px;
+						right: 0;
+						transition: opacity 0.2s ease-in-out;
 
-.header__navbar--login-button:hover:after {
-	opacity: 1;
-	right: 12px;
-}
+						a {
+							color: var(--text-color);
+							padding: 12px 14px;
+							text-decoration: none;
+							display: block;
 
-.header__navbar--dropdown-dropbtn {
-	background-color: var(--header-color);
-	cursor: pointer;
-}
+							&:hover {
+								background-color: #f1f1f1;
+								border-radius: 8px;
+							}
+						}
+					}
+				}
+			}
 
-.header__navbar--dropdown {
-	position: relative;
-	display: inline-block;
-}
+			&__loginButton {
+				padding: 8px 24px;
+				border: none;
+				border-radius: 24px;
+				font-size: 18px;
+				background-color: var(--content-color);
+				text-decoration: none;
 
-.header__navbar--dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f9f9f9;
-	min-width: 104px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	border-radius: 8px;
-	right: 0;
-}
+				display: inline-block;
+				position: relative;
+				transition: 0.5s;
 
-.header__navbar--dropdown-content a {
-	color: var(--text-color);
-	padding: 12px 14px;
-	text-decoration: none;
-	display: block;
-}
+				&::after {
+					content: url("../src/assets/images/black-arrow.svg");
+					position: absolute;
+					opacity: 0;
+					top: 12px;
+					right: -10px;
+					transition: 0.5s;
+				}
 
-.header__navbar--dropdown-content a:hover {
-	background-color: #f1f1f1;
-	border-radius: 8px;
-}
-
-.header__navbar--dropdown:hover .header__navbar--dropdown-content {
-	display: block;
-}
-
-.header__navbar--dropdown:hover .header__navbar--dropdown-dropbtn {
-	background-color: var(--header-color-hover);
+				&:hover {
+					cursor: pointer;
+					padding-right: 36px;
+					padding-left: 14px;
+				}
+				
+				&:hover {
+					&::after {
+						opacity: 1;
+						right: 12px;
+					}
+				}
+			}
+		}
+	}
 }
 </style>
