@@ -4,10 +4,7 @@
 			<div class="login__content__header">
 				<h1 class="login__content__header__title">Log In</h1>
 			</div>
-			<form
-        @submit.prevent="handleSubmit"
-        class="login__content__form"
-      >
+			<form @submit.prevent="handleSubmit" class="login__content__form">
 				<div class="login__content__form__item">
 					<input
 						autofill
@@ -15,11 +12,16 @@
 						class="login__content__form__item__input"
 						placeholder="Email"
 						v-model.trim="email"
-						:class="{ 'login__content__form__item__input-error': v$.email.$error }"
+						:class="{
+							'login__content__form__item__input-error': v$.email.$error,
+						}"
 					/>
-          <span v-if="v$.email.$error" class="login__content__form__item__error">
-            {{ v$.email.$errors[0].$message }}
-          </span>
+					<span
+						v-if="v$.email.$error"
+						class="login__content__form__item__error"
+					>
+						{{ v$.email.$errors[0].$message }}
+					</span>
 				</div>
 				<div class="login__content__form__item">
 					<input
@@ -27,25 +29,28 @@
 						class="login__content__form__item__input"
 						placeholder="Password"
 						v-model.trim="password"
-						:class="{ 'login__content__form__item__input-error': v$.password.$error }"
+						:class="{
+							'login__content__form__item__input-error': v$.password.$error,
+						}"
 						@keyup.enter="handleSubmit"
 					/>
-          <span v-if="v$.password.$error" class="login__content__form__item__error">
-					{{ v$.password.$errors[0].$message }}
-				</span>
+					<span
+						v-if="v$.password.$error"
+						class="login__content__form__item__error"
+					>
+						{{ v$.password.$errors[0].$message }}
+					</span>
 				</div>
-        <button
-          type="submit"
-          class="login__content__form__btn"
-        >
-          Log in
-        </button>
+				<button type="submit" class="login__content__form__btn">Log in</button>
 				<div class="login__content__form__footer">
 					<p>
 						Don't have an account?
-            <router-link class="login__content__form__footer__link" :to="{ name: 'SignupView' }">
-              Create one
-            </router-link>
+						<router-link
+							class="login__content__form__footer__link"
+							:to="{ name: 'SignupView' }"
+						>
+							Create one
+						</router-link>
 					</p>
 				</div>
 			</form>
@@ -122,52 +127,52 @@ export default {
 				font-weight: bold;
 			}
 		}
-    &__form {
-      &__item {
-        display: flex;
-        flex-direction: column;
-        margin-top: 12px;
-        &__input {
-          width: 100%;
-          padding: 12px;
-          border-radius: 12px;
-          border: none;
-          background-color: var(--input-background-color);
-          box-sizing: border-box;
-          &:placeholder-shown {
-            font-style: italic;
-          }
-          &-error {
-            border: 1px solid var(--red-color);
-          }
-        }
-        &__error {
-          color: var(--red-color);
-          font-size: 13px;
-          margin-top: 8px;
-        }
-      }
-      &__btn {
-        background-color: var(--blue-color);
-        color: var(--content-color);
-        padding: 12px;
-        border-radius: 12px;
-        width: 100%;
-        border: none;
-        margin-top: 12px;
-        cursor: pointer;
-      }
-      &__footer {
-        &__link {
-          text-decoration: none;
-          color: var(--blue-color);
-          cursor: pointer;
-        }
-      }
-    }
+		&__form {
+			&__item {
+				display: flex;
+				flex-direction: column;
+				margin-top: 16px;
+				&__input {
+					width: 100%;
+					padding: 12px;
+					border-radius: 12px;
+					border: none;
+					background-color: var(--input-background-color);
+					box-sizing: border-box;
+					&:placeholder-shown {
+						font-style: italic;
+					}
+					&-error {
+						border: 1px solid var(--red-color);
+					}
+				}
+				&__error {
+					color: var(--red-color);
+					font-size: 13px;
+					margin-top: 8px;
+				}
+			}
+			&__btn {
+				background-color: var(--blue-color);
+				color: var(--content-color);
+				padding: 12px;
+				border-radius: 12px;
+				width: 100%;
+				border: none;
+				margin-top: 16px;
+				cursor: pointer;
+			}
+			&__footer {
+				margin-top: 16px;
+				&__link {
+					text-decoration: none;
+					color: var(--blue-color);
+					cursor: pointer;
+				}
+			}
+		}
 	}
 }
-
 
 @media (max-width: 425px) {
 	.login__content {
