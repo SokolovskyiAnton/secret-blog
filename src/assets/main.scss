@@ -1,4 +1,6 @@
-
+@import "variables";
+@import "helpers";
+@import "layout";
 * {
 	margin: 0;
 	padding: 0;
@@ -8,6 +10,7 @@
 	font-size: 18px;
 }
 
+// ToDo move to variables.scss and create var for each color
 :root {
 	--title-color: #333333;
 	--text-color: #666666;
@@ -26,34 +29,4 @@
 body {
 	width: 100%;
 	min-height: 100vh;
-}
-
-.container {
-	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-@media (min-width: 576px) {
-	.container {
-		max-width: 100%;
-	}
-}
-
-@media (min-width: 1024px) {
-	.container {
-		max-width: 960px;
-	}
-}
-
-@media (min-width: 1216px) {
-	.container {
-		max-width: 1152px;
-	}
-}
-
-@media (min-width: 1408px) {
-	.container {
-		max-width: 1344px;
-	}
 }
