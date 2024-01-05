@@ -14,15 +14,30 @@
   justify-content: space-between;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
 
+@media (max-width: 576px) {
+
+  .sm-flex-column {
+    flex-direction: column;
+  }
+
+}
+
 @media (min-width: 576px) {
   .container {
     max-width: 100%;
+  }
+  .md-flex-row {
+    flex-direction: row;
   }
 }
 

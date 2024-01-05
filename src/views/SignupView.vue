@@ -5,8 +5,8 @@
 				<h1 class="signup__content__header__title">Create account</h1>
 			</div>
 			<form @submit.prevent="handleSubmit" class="signup__content__form">
-				<div class="flex">
-					<div class="signup__content__form__item mr-8">
+				<div class="flex sm-flex-column">
+					<div class="signup__content__form__item mr-8 sm-mr-0">
 						<input
 							type="text"
 							class="signup__content__form__item__input"
@@ -24,7 +24,7 @@
 							{{ v$.form.firstName.$errors[0].$message }}
 						</span>
 					</div>
-          <div class="signup__content__form__item ml-8">
+          <div class="signup__content__form__item ml-8 sm-ml-0">
             <input
                 type="text"
                 class="signup__content__form__item__input"

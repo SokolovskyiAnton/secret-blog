@@ -20,6 +20,17 @@ $spacing:
   .mt-#{$name} { margin-top: $num }
 }
 
+@media (max-width: 576px) {
+
+  @each $name, $num in $spacing {
+    .sm-ma-#{$name} { margin: $num }
+    .sm-mr-#{$name} { margin-right: $num }
+    .sm-ml-#{$name} { margin-left: $num }
+    .sm-mb-#{$name} { margin-bottom: $num }
+    .sm-mt-#{$name} { margin-top: $num }
+  }
+}
+
 
 /* ================
     * PADDINGS *
