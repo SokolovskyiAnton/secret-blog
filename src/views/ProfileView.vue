@@ -161,7 +161,7 @@ const handleImageChange = async (event) => {
 	const formData = new FormData();
 	formData.append("file", file);
 
-	await api.put(`/users/upload/${form.value._id}`, formData);
+	await api.put(`/users/upload`, formData);
 };
 
 const updatedForm = ref(null);
@@ -174,7 +174,7 @@ const isDisabled = computed(() => {
 });
 
 const saveData = async () => {
-	const updatedData = await api.patch(`/users/${form.value._id}`, form.value);
+	const updatedData = await api.patch(`/users`, form.value);
 
 	userStore.state = updatedData;
 };
