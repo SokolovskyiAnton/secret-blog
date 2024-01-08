@@ -7,12 +7,13 @@ export const usePostStore = defineStore("posts", {
 		isLoaded: false,
 	}),
 	getters: {
-		getPosts: ({ posts }) => posts,
+		postsList: ({ posts }) => posts,
 	},
 	actions: {
-		async getPostList() {
+		async getPosts() {
 			try {
-				this.posts = (await api.get("/posts")).data;
+				const response = (await api.get("/posts")).data;
+				this.posts = response.posts
 			} catch (error) {
 				throw error;
 			}

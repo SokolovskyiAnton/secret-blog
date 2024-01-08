@@ -19,11 +19,11 @@ const postStore = usePostStore();
 
 onMounted(async () => {
 	if (postStore.isLoaded) return;
-	await postStore.getPostList();
+	await postStore.getPosts();
 	postStore.isLoaded = true;
 });
 
-const postsData = computed(() => postStore.getPosts);
+const postsData = computed(() => postStore.postsList);
 </script>
 
 <style>
