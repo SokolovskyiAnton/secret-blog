@@ -29,11 +29,7 @@
 							for="nickname"
 							>Nickname</label
 						>
-						<input
-							class="profile-form__content__user-data__user-details__user-input"
-							type="text"
-							v-model="form.nickname"
-						/>
+						<InputComponent v-model="form.nickname" />
 					</div>
 					<div class="profile-form__content__user-data__user-fullName">
 						<div
@@ -44,12 +40,7 @@
 								for="fname"
 								>First name</label
 							>
-							<input
-								disabled="disabled"
-								class="profile-form__content__user-data__user-fullName__user-details__user-input-disabled"
-								type="text"
-								v-model="form.firstName"
-							/>
+							<InputComponent v-model="form.lastName" disabled borderless />
 						</div>
 						<div class="profile-form__content__user-data__user-details">
 							<label
@@ -57,12 +48,7 @@
 								for="lname"
 								>Last name</label
 							>
-							<input
-								disabled="disabled"
-								class="profile-form__user-input-disabled"
-								type="text"
-								v-model="form.lastName"
-							/>
+							<InputComponent v-model="form.lastName" disabled borderless />
 						</div>
 					</div>
 					<div class="profile-form__content__user-data__user-details">
@@ -71,36 +57,24 @@
 							for="email"
 							>Email</label
 						>
-						<input
-							class="profile-form__content__user-data__user-details__user-input"
-							type="text"
-							v-model="form.email"
-						/>
+						<InputComponent v-model="form.email" />
 					</div>
 					<div class="profile-form__content__user-data__user-details">
 						<label
 							class="profile-form__content__user-data__user-details__user-label"
-							for="email"
+							for="profession"
 							>Profession</label
 						>
-						<input
-							class="profile-form__user-input"
-							type="text"
-							v-model="form.profession"
-						/>
+						<InputComponent v-model="form.profession" />
 					</div>
 
 					<div class="profile-form__content__user-data__user-details">
 						<label
 							class="profile-form__content__user-data__user-details__user-label"
-							for="email"
+							for="skills"
 							>Skills</label
 						>
-						<input
-							class="profile-form__user-input"
-							type="text"
-							v-model="form.skills"
-						/>
+						<InputComponent v-model="form.skills" @close="" />
 					</div>
 
 					<div class="profile-form__content__user-data__buttons">
@@ -122,12 +96,6 @@
 						>
 							Save
 						</button>
-						<InputComponent
-							v-model="form.email"
-							color="var(--blue-color-1)"
-							bg-color="yellow"
-							class="mt-12"
-						/>
 					</div>
 				</form>
 			</div>
@@ -141,6 +109,7 @@ import { useUserStore } from "../stores/userStore";
 import api from "../api";
 import InputComponent from "../components/InputComponent.vue";
 
+defineEmits(["close"]);
 const userStore = useUserStore();
 
 const usersData = computed(() => {
@@ -214,8 +183,7 @@ onMounted(async () => {
 	input {
 		padding: 12px;
 		border-radius: 12px;
-		background-color: var(--input-background-color);
-		border: 2px solid rgb(190, 184, 184);
+		border: 2px solid var(--black-color-5);
 		width: 100%;
 	}
 }
@@ -277,8 +245,7 @@ onMounted(async () => {
 					&__user-input-disabled {
 						padding: 12px;
 						border-radius: 12px;
-						color: rgb(137, 137, 160);
-						background-color: #91b9ce12;
+						color: var(--black-color-3);
 					}
 				}
 			}
@@ -286,11 +253,11 @@ onMounted(async () => {
 			&__buttons {
 				&__cancel-button {
 					font-weight: bold;
-					color: rgb(107, 142, 201);
+					color: var(--blue-color-3);
 					height: 48px;
 					padding: 0 24px;
 					border-radius: 24px;
-					border: 2px solid rgb(107, 142, 201);
+					border: 2px solid var(--blue-color-3);
 					background-color: transparent;
 					box-sizing: border-box;
 
@@ -302,11 +269,11 @@ onMounted(async () => {
 				}
 				&__save-button {
 					font-weight: bold;
-					color: rgb(97, 169, 97);
+					color: var(--green-color-2);
 					height: 48px;
 					padding: 0 24px;
 					border-radius: 24px;
-					border: 2px solid rgb(97, 169, 97);
+					border: 2px solid var(--green-color-2);
 					background-color: transparent;
 					box-sizing: border-box;
 
@@ -322,8 +289,8 @@ onMounted(async () => {
 }
 
 .disabledButton {
-	color: rgb(190, 184, 184);
-	border: 2px solid rgb(190, 184, 184);
+	color: var(--black-color-5);
+	border: 2px solid var(--black-color-5);
 }
 
 @media (max-width: 768px) {
