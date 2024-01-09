@@ -114,7 +114,7 @@ export default {
 		border: none;
 		border-radius: 24px;
 		padding: 72px 96px 96px;
-		background-color: var(--content-color);
+		background-color: var(--white-color-1);
 
 		&__header {
 			display: flex;
@@ -122,7 +122,7 @@ export default {
 			align-items: center;
 
 			&__title {
-				color: var(--title-color);
+				color: var(--black-color-1);
 				font-size: 36px;
 				font-weight: bold;
 			}
@@ -137,24 +137,25 @@ export default {
 					padding: 12px;
 					border-radius: 12px;
 					border: none;
-					background-color: var(--input-background-color);
+					background-color: var(--white-color-2);
 					box-sizing: border-box;
 					&:placeholder-shown {
 						font-style: italic;
 					}
 					&-error {
-						border: 1px solid var(--red-color);
+						border: 1px solid var(--error-color);
 					}
 				}
 				&__error {
 					color: var(--red-color);
-					font-size: 13px;
-					margin-top: 8px;
+					font-size: var(--grid-16);
+					display: flex;
+					margin-top: var(--grid-8);
 				}
 			}
 			&__btn {
-				background-color: var(--blue-color);
-				color: var(--content-color);
+				background-color: var(--blue-color-2);
+				color: var(--white-color-1);
 				padding: 12px;
 				border-radius: 12px;
 				width: 100%;
@@ -166,7 +167,7 @@ export default {
 				margin-top: 16px;
 				&__link {
 					text-decoration: none;
-					color: var(--blue-color);
+					color: var(--blue-color-3);
 					cursor: pointer;
 				}
 			}

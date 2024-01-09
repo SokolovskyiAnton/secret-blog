@@ -67,7 +67,7 @@ const isLoggedIn = computed(() => {
 
 <style lang="scss">
 .header {
-	background-color: var(--header-color);
+	background-color: var(--red-color-1);
 	&__navbar {
 		&__content {
 			display: flex;
@@ -92,11 +92,11 @@ const isLoggedIn = computed(() => {
 					display: inline-block;
 
 					&__dropbtn {
-						background-color: var(--header-color);
+						background-color: var(--red-color-1);
 						cursor: pointer;
 
 						&:hover {
-							background-color: var(--header-color-hover);
+							background-color: var(--red-color-2);
 						}
 
 						&__logo-icon {
@@ -123,7 +123,7 @@ const isLoggedIn = computed(() => {
 						transition: opacity 0.2s ease-in-out;
 
 						a {
-							color: var(--text-color);
+							color: var(--black-color-2);
 							padding: 12px 14px;
 							text-decoration: none;
 							display: block;
@@ -142,7 +142,7 @@ const isLoggedIn = computed(() => {
 				border: none;
 				border-radius: 24px;
 				font-size: 18px;
-				background-color: var(--content-color);
+				background-color: var(--white-color-1);
 				text-decoration: none;
 
 				display: inline-block;

@@ -13,13 +13,15 @@ const props = defineProps({
 	bgColor: {
 		type: String,
 		default: "transparent",
-	},
+    },
+   
 });
 
 const styles = computed(() => {
 	return {
 		color: props.color,
-		backgroundColor: props.bgColor,
+        backgroundColor: props.bgColor,
+        
 	};
 });
 const text = ref("hello");

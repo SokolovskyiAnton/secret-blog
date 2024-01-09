@@ -171,7 +171,7 @@ export default {
 		border: none;
 		border-radius: var(--grid-24);
 		padding: 72px 96px 96px;
-		background-color: var(--content-color);
+		background-color: var(--white-color-1);
 
 		&__header {
 			display: flex;
@@ -179,7 +179,7 @@ export default {
 			align-items: center;
 
 			&__title {
-				color: var(--title-color);
+				color: var(--black-color-1);
 				font-size: 36px;
 				font-weight: bold;
 			}
@@ -193,7 +193,7 @@ export default {
 					padding: var(--grid-12);
 					border-radius: var(--grid-12);
 					border: none;
-					background-color: var(--input-background-color);
+					background-color: var(--white-color-2);
 					box-sizing: border-box;
 
 					&:placeholder-shown {
@@ -215,8 +215,8 @@ export default {
 				position: relative;
 				margin-top: 16px;
 				&__btn {
-					background-color: var(--blue-color);
-					color: var(--content-color);
+					background-color: var(--blue-color-2);
+					color: var(--white-color-1);
 					padding: 12px;
 					border-radius: 12px;
 					width: 100%;
@@ -236,7 +236,7 @@ export default {
 				text-align: center;
 				&__link {
 					text-decoration: none;
-					color: var(--blue-color);
+					color: var(--blue-color-3);
 					cursor: pointer;
 				}
 			}

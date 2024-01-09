@@ -124,7 +124,7 @@
 						</button>
 						<InputComponent
 							v-model="form.email"
-							color="red"
+							color="var(--blue-color-1)"
 							bg-color="yellow"
 							class="mt-12"
 						/>
@@ -214,7 +214,7 @@ onMounted(async () => {
 	input {
 		padding: 12px;
 		border-radius: 12px;
-		background-color: #91b9ce12;
+		background-color: var(--input-background-color);
 		border: 2px solid rgb(190, 184, 184);
 		width: 100%;
 	}
@@ -296,8 +296,8 @@ onMounted(async () => {
 
 					&:hover:enabled {
 						cursor: pointer;
-						color: var(--profile-cancel-button-color);
-						border: 2px solid var(--profile-cancel-button-color);
+						color: var(--blue-color-1);
+						border: 2px solid var(--blue-color-1);
 					}
 				}
 				&__save-button {
@@ -312,8 +312,8 @@ onMounted(async () => {
 
 					&:hover:enabled {
 						cursor: pointer;
-						color: var(--profile-save-button-color);
-						border: 2px solid var(--profile-save-button-color);
+						color: var(--green-color-1);
+						border: 2px solid var(--green-color-1);
 					}
 				}
 			}

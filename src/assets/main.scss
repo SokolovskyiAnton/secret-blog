@@ -5,33 +5,9 @@
 	margin: 0;
 	padding: 0;
 	font-family: "Open Sans", sans-serif;
-	color: var(--text-color);
+	color: var(--black-color-2);
 	box-sizing: border-box;
 	font-size: 18px;
-}
-
-// ToDo move to variables.scss and create var for each color
-:root {
-	--black-color: $black-color;
-	--title-color: var(--black-color-1);
-	--text-color: var(--black-color-2);
-	--disabled-input-colot: var(--black-color-3);
-
-	--white-color: $white-color;
-	--content-color: var(--white-color-1);
-	--input-background-color: var(--white-color-2);
-
-	--blue-color: $blue-color;
-	--profile-cancel-button-color: var(--blue-color-1);
-
-	--background-gradient: linear-gradient(30deg, #f3959b, #f9b4c5, #fec6c6);
-
-	--red-color: $red-color;
-	--header-color: var(--red-color-1);
-	--header-color-hover: var(--red-color-2);
-
-	--green-color: $green-color;
-	--profile-save-button-color: var(--green-color-1);
 }
 
 body {
