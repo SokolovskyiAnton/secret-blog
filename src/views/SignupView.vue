@@ -24,24 +24,24 @@
 							{{ v$.form.firstName.$errors[0].$message }}
 						</span>
 					</div>
-          <div class="signup__content__form__item ml-8 sm-ml-0">
-            <input
-                type="text"
-                class="signup__content__form__item__input"
-                placeholder="First name"
-                v-model.trim="form.lastName"
-                :class="{
+					<div class="signup__content__form__item ml-8 sm-ml-0">
+						<input
+							type="text"
+							class="signup__content__form__item__input"
+							placeholder="First name"
+							v-model.trim="form.lastName"
+							:class="{
 								'signup__content__form__item__input-error':
 									v$.form.firstName.$error,
 							}"
-            />
-            <span
-                v-if="v$.form.lastName.$error"
-                class="signup__content__form__item__error"
-            >
+						/>
+						<span
+							v-if="v$.form.lastName.$error"
+							class="signup__content__form__item__error"
+						>
 							{{ v$.form.lastName.$errors[0].$message }}
 						</span>
-          </div>
+					</div>
 				</div>
 				<div class="signup__content__form__item">
 					<input
@@ -93,17 +93,17 @@
 						class="signup__content__form__submit__arrow"
 					/>
 				</div>
-        <div class="signup__content__form__footer">
-          <p>
-            Do you have an account?
-            <router-link
-                class="login__content__form__footer__link"
-                :to="{ name: 'LoginView' }"
-            >
-              Login
-            </router-link>
-          </p>
-        </div>
+				<div class="signup__content__form__footer">
+					<p>
+						Do you have an account?
+						<router-link
+							class="login__content__form__footer__link"
+							:to="{ name: 'LoginView' }"
+						>
+							Login
+						</router-link>
+					</p>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -136,7 +136,7 @@ export default {
 				lastName: { required, minLength: minLength(4) },
 				email: { required, email },
 				password: { required },
-			}
+			},
 		};
 	},
 	methods: {
@@ -189,25 +189,25 @@ export default {
 			&__item {
 				margin-top: var(--grid-12);
 				&__input {
-          width: 100%;
-          padding: var(--grid-12);
-          border-radius: var(--grid-12);
-          border: none;
-          background-color: var(--input-background-color);
-          box-sizing: border-box;
+					width: 100%;
+					padding: var(--grid-12);
+					border-radius: var(--grid-12);
+					border: none;
+					background-color: var(--input-background-color);
+					box-sizing: border-box;
 
 					&:placeholder-shown {
 						font-style: italic;
 					}
 					&-error {
-            border: 1px solid var(--red-color);
+						border: 1px solid var(--red-color);
 					}
 				}
 				&__error {
-          color: var(--red-color);
-          font-size: var(--grid-16);
-          display: flex;
-          margin-top: var(--grid-8);
+					color: var(--red-color);
+					font-size: var(--grid-16);
+					display: flex;
+					margin-top: var(--grid-8);
 				}
 			}
 
@@ -231,15 +231,15 @@ export default {
 					left: -12px;
 				}
 			}
-      &__footer {
-        margin-top: 16px;
-        text-align: center;
-        &__link {
-          text-decoration: none;
-          color: var(--blue-color);
-          cursor: pointer;
-        }
-      }
+			&__footer {
+				margin-top: 16px;
+				text-align: center;
+				&__link {
+					text-decoration: none;
+					color: var(--blue-color);
+					cursor: pointer;
+				}
+			}
 		}
 	}
 }

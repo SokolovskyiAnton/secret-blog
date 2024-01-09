@@ -122,6 +122,12 @@
 						>
 							Save
 						</button>
+						<InputComponent
+							v-model="form.email"
+							color="red"
+							bg-color="yellow"
+							class="mt-12"
+						/>
 					</div>
 				</form>
 			</div>
@@ -133,6 +139,7 @@
 import { onMounted, ref, computed } from "vue";
 import { useUserStore } from "../stores/userStore";
 import api from "../api";
+import InputComponent from "../components/InputComponent.vue";
 
 const userStore = useUserStore();
 

@@ -1,3 +1,4 @@
+
 :root {
   /* ================
       * GRID *
@@ -9,4 +10,35 @@
   --grid-24: 24px;
   --grid-32: 32px;
   --grid-40: 40px;
+
+    /* ================
+      * COLORS *
+    ================== */
+  --black-color: #000;
+  --black-color-1:#333333;
+  --black-color-2: #666666;
+  --black-color-3: rgb(137, 137, 160);
+
+  --white-color: rgb(255, 255, 255);
+  --white-color-1: #f6eeee;
+  --white-color-2: #f5f5f5;
+
+  --blue-color: rgb(0, 0, 255);
+  --blue-color-1: #089fe0;
+
+  --red-color: rgb(231, 105, 105);
+  --red-color-1: #d97474;
+  --red-color-2: #d66464;
+
+  --green-color:  rgb(1, 54, 1);
+  --green-color-1:  rgb(2, 126, 2);
+
+
+
+
+  
+
+
+
+
 }
