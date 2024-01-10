@@ -40,7 +40,7 @@
 								for="fname"
 								>First name</label
 							>
-							<InputComponent v-model="form.lastName" disabled borderless />
+							<InputComponent v-model="form.lastName" disabled />
 						</div>
 						<div class="profile-form__content__user-data__user-details">
 							<label
@@ -48,7 +48,7 @@
 								for="lname"
 								>Last name</label
 							>
-							<InputComponent v-model="form.lastName" disabled borderless />
+							<InputComponent v-model="form.lastName" disabled />
 						</div>
 					</div>
 					<div class="profile-form__content__user-data__user-details">
@@ -74,7 +74,7 @@
 							for="skills"
 							>Skills</label
 						>
-						<InputComponent v-model="form.skills" @close="" />
+						<InputComponent v-model="form.skills" />
 					</div>
 
 					<div class="profile-form__content__user-data__buttons">
@@ -109,13 +109,7 @@ import { useUserStore } from "../stores/userStore";
 import api from "../api";
 import InputComponent from "../components/InputComponent.vue";
 
-defineEmits(["close"]);
 const userStore = useUserStore();
-
-const usersData = computed(() => {
-	return userStore.getUserData;
-});
-
 const form = ref({
 	email: "",
 	nickname: "",
@@ -123,9 +117,18 @@ const form = ref({
 	skills: "",
 	avatar: "",
 });
-
 const imageInput = ref(null);
+const updatedForm = ref(null);
 
+const isDisabled = computed(() => {
+  if (!updatedForm.value) return;
+  return Object.keys(form.value).some((field) => {
+    return form.value[field] !== updatedForm.value[field];
+  });
+});
+const usersData = computed(() => {
+  return userStore.getUserData;
+});
 const openImageInput = () => {
 	imageInput.value.click();
 };
@@ -140,19 +143,9 @@ const handleImageChange = async (event) => {
 	await api.put(`/users/upload`, formData);
 };
 
-const updatedForm = ref(null);
-
-const isDisabled = computed(() => {
-	if (!updatedForm.value) return;
-	return Object.keys(form.value).some((field) => {
-		return form.value[field] !== updatedForm.value[field];
-	});
-});
-
 const saveData = async () => {
-	const updatedData = await api.patch(`/users`, form.value);
-
-	userStore.state = updatedData;
+  // ToDO refactor. Create request in store
+  userStore.state = await api.patch(`/users`, form.value);
 };
 
 const cancelChangedData = () => {
@@ -170,6 +163,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss">
+// Refactor styles
 %user-details-styles {
 	display: flex;
 	flex-direction: column;

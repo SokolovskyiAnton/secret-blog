@@ -6,16 +6,12 @@
 			</div>
 			<form @submit.prevent="handleSubmit" class="login__content__form">
 				<div class="login__content__form__item">
-					<input
-						autofill
-						type="text"
-						class="login__content__form__item__input"
-						placeholder="Email"
-						v-model.trim="email"
-						:class="{
-							'login__content__form__item__input-error': v$.email.$error,
-						}"
-					/>
+          <InputComponent
+              v-model="email"
+              borderless
+              placeholder="Email"
+              :error="v$.email.$error"
+          />
 					<span
 						v-if="v$.email.$error"
 						class="login__content__form__item__error"
@@ -24,16 +20,13 @@
 					</span>
 				</div>
 				<div class="login__content__form__item">
-					<input
-						type="password"
-						class="login__content__form__item__input"
-						placeholder="Password"
-						v-model.trim="password"
-						:class="{
-							'login__content__form__item__input-error': v$.password.$error,
-						}"
-						@keyup.enter="handleSubmit"
-					/>
+          <InputComponent
+              v-model="password"
+              borderless
+              type="password"
+              placeholder="Password"
+              :error="v$.password.$error"
+          />
 					<span
 						v-if="v$.password.$error"
 						class="login__content__form__item__error"
@@ -62,8 +55,10 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useUserStore } from "@/stores/userStore";
+import InputComponent from "@/components/InputComponent.vue";
 
 export default {
+  components: {InputComponent},
 	setup() {
 		return { v$: useVuelidate(), userStore: useUserStore() };
 	},
@@ -132,20 +127,6 @@ export default {
 				display: flex;
 				flex-direction: column;
 				margin-top: 16px;
-				&__input {
-					width: 100%;
-					padding: 12px;
-					border-radius: 12px;
-					border: none;
-					background-color: var(--white-color-2);
-					box-sizing: border-box;
-					&:placeholder-shown {
-						font-style: italic;
-					}
-					&-error {
-						border: 1px solid var(--error-color);
-					}
-				}
 				&__error {
 					color: var(--red-color);
 					font-size: var(--grid-16);

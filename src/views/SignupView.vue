@@ -7,16 +7,12 @@
 			<form @submit.prevent="handleSubmit" class="signup__content__form">
 				<div class="flex sm-flex-column">
 					<div class="signup__content__form__item mr-8 sm-mr-0">
-						<input
-							type="text"
-							class="signup__content__form__item__input"
-							placeholder="First name"
-							v-model.trim="form.firstName"
-							:class="{
-								'signup__content__form__item__input-error':
-									v$.form.firstName.$error,
-							}"
-						/>
+            <InputComponent
+              v-model="form.firstName"
+              borderless
+              placeholder="First name"
+              :error="v$.form.firstName.$error"
+            />
 						<span
 							v-if="v$.form.firstName.$error"
 							class="signup__content__form__item__error"
@@ -25,16 +21,12 @@
 						</span>
 					</div>
 					<div class="signup__content__form__item ml-8 sm-ml-0">
-						<input
-							type="text"
-							class="signup__content__form__item__input"
-							placeholder="First name"
-							v-model.trim="form.lastName"
-							:class="{
-								'signup__content__form__item__input-error':
-									v$.form.firstName.$error,
-							}"
-						/>
+            <InputComponent
+                v-model="form.lastName"
+                borderless
+                placeholder="Last name"
+                :error="v$.form.lastName.$error"
+            />
 						<span
 							v-if="v$.form.lastName.$error"
 							class="signup__content__form__item__error"
@@ -44,15 +36,12 @@
 					</div>
 				</div>
 				<div class="signup__content__form__item">
-					<input
-						type="text"
-						class="signup__content__form__item__input"
-						placeholder="Email"
-						v-model.trim="form.email"
-						:class="{
-							'signup__content__form__item__input-error': v$.form.email.$error,
-						}"
-					/>
+          <InputComponent
+              v-model="form.email"
+              borderless
+              placeholder="Email"
+              :error="v$.form.email.$error"
+          />
 					<span
 						v-if="v$.form.email.$error"
 						class="signup__content__form__item__error"
@@ -62,16 +51,13 @@
 				</div>
 
 				<div class="signup__content__form__item">
-					<input
-						type="password"
-						class="signup__content__form__item__input"
-						placeholder="Password"
-						v-model.trim="form.password"
-						:class="{
-							'signup__content__form__item__input-error':
-								v$.form.password.$error,
-						}"
-					/>
+          <InputComponent
+              v-model="form.password"
+              borderless
+              type="password"
+              placeholder="Password"
+              :error="v$.form.password.$error"
+          />
 					<span
 						v-if="v$.form.password.$error"
 						class="signup__content__form__item__error"
@@ -113,9 +99,11 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import { useUserStore } from "@/stores/userStore";
+import InputComponent from "@/components/InputComponent.vue";
 // ToDo Create notification service
 // ToDo Create loading button component
 export default {
+  components: {InputComponent},
 	setup() {
 		return { v$: useVuelidate(), userStore: useUserStore() };
 	},
@@ -188,21 +176,6 @@ export default {
 		&__form {
 			&__item {
 				margin-top: var(--grid-12);
-				&__input {
-					width: 100%;
-					padding: var(--grid-12);
-					border-radius: var(--grid-12);
-					border: none;
-					background-color: var(--white-color-2);
-					box-sizing: border-box;
-
-					&:placeholder-shown {
-						font-style: italic;
-					}
-					&-error {
-						border: 1px solid var(--red-color);
-					}
-				}
 				&__error {
 					color: var(--red-color);
 					font-size: var(--grid-16);

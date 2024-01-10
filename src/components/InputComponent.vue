@@ -1,22 +1,20 @@
 <template>
-	<!-- <label :class="{ smallLabel: isInputFocused }">{{ label }}</label> -->
 	<input
-        class="InputComponent"
+    class="InputComponent"
+    :type="type"
 		:style="styles"
-        :class="classes"
+    :class="classes"
 		:value="modelValue"
 		:disabled="disabled"
+    :placeholder="placeholder"
 		@input="$emit('update:modelValue', $event.target.value)"
 	/>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 
-
-
-defineEmits(["update:modelValue", "close"]);
-
+defineEmits(["update:modelValue"]);
 const props = defineProps({
 	color: {
 		type: String,
@@ -41,15 +39,19 @@ const props = defineProps({
 	disabled: {
 		type: Boolean,
 		default: false,
-    },
+  },
     borderless: {
-        type: Boolean,
-		default: false,
-    },
-    password: {
-        type: String,
-        default: "",
-    }
+    type: Boolean,
+    default: false,
+  },
+  error: {
+    type: Boolean,
+    default: false
+  },
+  type: {
+    type: String,
+    default: 'text'
+  }
 });
 
 const styles = computed(() => {
@@ -63,29 +65,22 @@ const styles = computed(() => {
 const classes = computed(() => {
     return [
         props.borderless ? "InputComponent__borderless" : "",
-
+        props.error ? "InputComponent__error" : ""
     ];
 })
 </script>
 
 <style lang="scss" scoped>
 .InputComponent {
-	padding: 12px;
-	border-radius: 12px;
+	padding: var(--grid-12);
+	border-radius: var(--grid-12);
 	border: 2px solid var(--black-color-5);
-    
 	width: 100%;
-    &__borderless {
-        border: none;
-    }
+  &__borderless {
+    border: none;
+  }
+  &__error {
+    border: 1px solid var(--red-color);
+  }
 }
-
-.smallLabel {
-	font-size: 0.8em;
-	position: absolute;
-	top: 5px;
-	left: 5px;
-}
-
-
 </style>
