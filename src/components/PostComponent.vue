@@ -26,6 +26,7 @@ const props = defineProps({
 const { format } = useDateFormat();
 
 const formattedDate = computed(() => {
+	console.log(format(props.post.dateCreated));
     return format(props.post.dateCreated);
 });
 </script>
