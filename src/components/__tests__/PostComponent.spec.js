@@ -16,25 +16,20 @@ describe("PostComponent", () => {
 			},
 		});
 	});
-
-	it("render correctly", () => {
-		expect(wrapper).toBeDefined();
-	});
-
 	it("check title", () => {
 		const h1 = wrapper.find("h1");
-		expect(h1.text()).toBe("Title");
+		expect(h1.text()).toBe(post.title);
 	});
 
 	it("check description", () => {
 		const desc = wrapper.find("p");
-		expect(desc.text()).toEqual("Description");
+		expect(desc.text()).toEqual(post.description);
 	});
 
-	it("check description", () => {
+	it("check date format", () => {
 		const date = wrapper.find("small");
 		expect(date.text()).toBe(
-			new Date("2023-12-10T18:24:43.907Z").toLocaleDateString()
+			new Date(post.dateCreated).toLocaleDateString()
 		);
 	});
 });
