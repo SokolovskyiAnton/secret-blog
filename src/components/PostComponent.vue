@@ -6,7 +6,9 @@
 				src="../assets/images/post-picture.svg"
 				alt="mountains"
 			/>
-			<p>{{ post.description }}</p>
+			<div class="post__content__description">
+				<p>{{ post.description }}</p>
+			</div>
 			<small>{{ formattedDate }}</small>
 		</div>
 	</div>
@@ -28,11 +30,16 @@ const { format } = useDateFormat();
 const formattedDate = computed(() => format(props.post.dateCreated));
 </script>
 
-<style>
+<style lang="scss">
 .post {
 	display: flex;
 	justify-content: center;
 	margin-right: 24px;
 	margin-top: 24px;
+	&__content {
+		&__description {
+
+		}
+	}
 }
 </style>

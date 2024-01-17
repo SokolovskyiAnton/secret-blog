@@ -1,12 +1,12 @@
 <template>
 	<header-component></header-component>
 	<router-view />
+	<modal-component />
 </template>
-
 <script>
-import router from "./router";
 import HeaderComponent from "./components/HeaderComponent.vue";
 import { useUserStore } from "./stores/userStore";
+import ModalComponent from "./components/ModalComponent.vue";
 
 export default {
 	setup() {
@@ -14,8 +14,8 @@ export default {
 	},
 	name: "App",
 	components: {
-		router,
 		HeaderComponent,
+		ModalComponent,
 	},
 	async created() {
 		const token = localStorage.getItem("authToken");

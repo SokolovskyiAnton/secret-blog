@@ -40,7 +40,7 @@
 								for="fname"
 								>First name</label
 							>
-							<InputComponent v-model="form.lastName" disabled />
+							<InputComponent v-model="form.firstName" disabled />
 						</div>
 						<div class="profile-form__content__user-data__user-details">
 							<label
@@ -109,6 +109,8 @@ import { useUserStore } from "../stores/userStore";
 import api from "../api";
 import InputComponent from "../components/InputComponent.vue";
 
+
+
 const userStore = useUserStore();
 const form = ref({
 	email: "",
@@ -121,13 +123,13 @@ const imageInput = ref(null);
 const updatedForm = ref(null);
 
 const isDisabled = computed(() => {
-  if (!updatedForm.value) return;
-  return Object.keys(form.value).some((field) => {
-    return form.value[field] !== updatedForm.value[field];
-  });
+	if (!updatedForm.value) return;
+	return Object.keys(form.value).some((field) => {
+		return form.value[field] !== updatedForm.value[field];
+	});
 });
 const usersData = computed(() => {
-  return userStore.getUserData;
+	return userStore.getUserData;
 });
 const openImageInput = () => {
 	imageInput.value.click();
@@ -144,8 +146,8 @@ const handleImageChange = async (event) => {
 };
 
 const saveData = async () => {
-  // ToDO refactor. Create request in store
-  userStore.state = await api.patch(`/users`, form.value);
+	// ToDO refactor. Create request in store
+	userStore.state = await api.patch(`/users`, form.value);
 };
 
 const cancelChangedData = () => {
