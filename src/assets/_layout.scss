@@ -24,8 +24,23 @@
   margin-left: auto;
 }
 
-@media (max-width: 576px) {
+@media (min-width: 425px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  p {
+    
+  }
+}
 
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+
+@media (max-width: 576px) {
   .sm-flex-column {
     flex-direction: column;
   }

@@ -34,8 +34,7 @@ const formattedDate = computed(() => format(props.post.dateCreated));
 .post {
 	display: flex;
 	justify-content: center;
-	margin-right: 24px;
-	margin-top: 24px;
+	margin: 24px;
 	&__content {
 		&__description {
 

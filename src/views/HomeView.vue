@@ -85,9 +85,9 @@ const openInfoModal = () => {
 	}
 }
 
-@media (min-width: 768px) {
+@media (max-width: 425px) {
 	.post-wrapper {
-		display: flex;
+		flex-direction: column;
 	}
 }
 </style>

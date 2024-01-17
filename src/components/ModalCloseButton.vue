@@ -22,7 +22,6 @@ const store = useModalStore();
 		padding: 0 24px;
 		border-radius: 24px;
 		border: 2px solid var(--red-color);
-    margin-top: 18px;
 		background-color: transparent;
 		box-sizing: border-box;
     &:hover {

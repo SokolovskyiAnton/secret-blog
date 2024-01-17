@@ -11,6 +11,7 @@
 			>
 				<div class="modal__inner">
 					<div class="modal__inner__closeBtn" @click.self="store.closeModal">
+						<!-- <img src="..src/images/close-icon.svg" alt=""> -->
 						X
 					</div>
 					<component :is="component" v-bind="props" />
@@ -48,13 +49,10 @@ onUnmounted(() => {
 	position: fixed;
 	left: 0;
 	top: 0;
-
 	z-index: 500;
-
 	width: 100vw;
 	height: 100vh;
-	background: rgba(0, 0, 0, 0.2);
-
+	background: var( --black-color-6);
 	display: grid;
 	place-items: center;
 
@@ -65,6 +63,7 @@ onUnmounted(() => {
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
+		width: 600px;
 
 		&__closeBtn {
 			text-align: right;
@@ -84,5 +83,15 @@ onUnmounted(() => {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
 	transition: 0.25s ease all;
+}
+
+@media (max-width: 425px) {
+	.modal__inner {
+		width: 80%;
+		height: fit-content;
+		overflow-y: auto;
+		max-height: 95%;
+	}
+	
 }
 </style>

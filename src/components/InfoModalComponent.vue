@@ -1,7 +1,13 @@
 <template>
 	<div class="inner">
-		<h2>This is a modal window!</h2>
+		<h1>Create your own post!</h1>
 		<p>{{ text }}</p>
+		<textarea
+			rows="20"
+			cols="100"
+			placeholder="What's on your mind?"
+			class="inner__text"
+		></textarea>
 
 		<ModalCloseButton />
 	</div>
@@ -15,20 +21,29 @@ const props = defineProps({
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-.inner > h2 {
-	font-size: 3rem;
-	font-weight: bold;
+.inner {
+	h1 {
+		font-weight: bold;
+	}
+	&__text {
+		width: 500px;
+		height: 200px;
+		padding: 24px;
+		margin: 18px 0 18px;
+	}
 }
 
-.inner > p {
-	font-size: 1.8rem;
-	font-weight: 300;
+@media (max-width: 425px) {
+	.inner__text {
+		width: fit-content;
+		max-width: 100%;
+	}
 }
 </style>
