@@ -2,17 +2,16 @@
 	<Teleport to="body">
 		<Transition name="modal-fade">
 			<div
-				class="modal-wrapper modal"
-				@click.self="store.closeModal"
+				class="modal"
+				@click.self="modalStore.closeModal"
 				v-if="component"
 				aria-modal="true"
 				role="dialog"
 				tabindex="-1"
 			>
 				<div class="modal__inner">
-					<div class="modal__inner__closeBtn" @click.self="store.closeModal">
-						<!-- <img src="..src/images/close-icon.svg" alt=""> -->
-						X
+					<div class="modal__inner__header">
+						<span @click.self="modalStore.closeModal">&#9587;</span>
 					</div>
 					<component :is="component" v-bind="props" />
 				</div>
@@ -25,13 +24,13 @@
 import { computed, onMounted, onUnmounted } from "vue";
 import { useModalStore } from "../stores/modalStore";
 
-const store = useModalStore();
+const modalStore = useModalStore();
 
-const component = computed(() => store.modalState?.component);
-const props = computed(() => store.modalState?.props);
+const component = computed(() => modalStore.modalState?.component);
+const props = computed(() => modalStore.modalState?.props);
 
 const keyDownListener = (event) => {
-	if (event.key === "Escape") store.closeModal();
+	if (event.key === "Escape") modalStore.closeModal();
 };
 
 onMounted(() => {
@@ -44,7 +43,6 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
-.modal-wrapper,
 .modal {
 	position: fixed;
 	left: 0;
@@ -52,20 +50,17 @@ onUnmounted(() => {
 	z-index: 500;
 	width: 100vw;
 	height: 100vh;
-	background: var( --black-color-6);
+	background: var(--black-color-6);
 	display: grid;
 	place-items: center;
 
 	&__inner {
+
 		background-color: white;
 		padding: 40px 48px;
 		border-radius: 1rem;
-		display: flex;
-		flex-direction: column;
-		gap: 0.4rem;
-		width: 600px;
 
-		&__closeBtn {
+		&__header {
 			text-align: right;
 			font-weight: bold;
 			&:hover {
@@ -92,6 +87,5 @@ onUnmounted(() => {
 		overflow-y: auto;
 		max-height: 95%;
 	}
-	
 }
 </style>

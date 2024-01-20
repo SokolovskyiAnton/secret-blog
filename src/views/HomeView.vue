@@ -19,10 +19,9 @@
 import { onMounted, computed } from "vue";
 import { usePostStore } from "../stores/postStore";
 import PostComponent from "../components/PostComponent.vue";
-import InfoModalComponent from "../components/InfoModalComponent.vue";
+import PostFormComponent from "../components/PostFormComponent.vue";
 import { useModalStore } from "../stores/modalStore";
 import { useUserStore } from "../stores/userStore";
-import ModalComponent from "../components/ModalComponent.vue";
 
 const postStore = usePostStore();
 
@@ -40,8 +39,7 @@ const postsData = computed(() => postStore.postsList);
 
 const openModal = () => {
 	modalStore.openModal({
-		component: InfoModalComponent,
-		props: { text: "Props have been successfully passed!" },
+		component: PostFormComponent,
 	});
 };
 

@@ -1,11 +1,8 @@
 <template>
 	<div class="post">
 		<div class="post__content">
+			<img src="../assets/images/post-picture.svg" alt="mountains" />
 			<h1>{{ post.title }}</h1>
-			<img
-				src="../assets/images/post-picture.svg"
-				alt="mountains"
-			/>
 			<div class="post__content__description">
 				<p>{{ post.description }}</p>
 			</div>
@@ -37,7 +34,6 @@ const formattedDate = computed(() => format(props.post.dateCreated));
 	margin: 24px;
 	&__content {
 		&__description {
-
 		}
 	}
 }

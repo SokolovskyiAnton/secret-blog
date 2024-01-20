@@ -99,7 +99,7 @@
 
 <script>
 import { useVuelidate } from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, email, minLength } from "@vuelidate/validators";
 import { useUserStore } from "@/stores/userStore";
 import InputComponent from "@/components/InputComponent.vue";
 // ToDo Create notification service
