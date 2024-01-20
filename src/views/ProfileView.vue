@@ -1,106 +1,108 @@
 <template>
-	<div class="container">
-		<div class="profile-form">
-			<div class="profile-form__content">
-				<div class="profile-form__content__avatar-box">
-					<img
-						class="profile-form__content__avatar-box__avatar-image"
-						:src="form.avatar ? form.avatar : './icons/default-user-icon.svg'"
-						alt="User photo"
-					/>
-					<div class="profile-form__content__avatar-box__edit-image">
-						<label
-							class="profile-form__content__avatar-box__edit-image__icon"
-							@click.prevent="openImageInput"
-						>
-						</label>
-						<input
-							class="profile-form__content__avatar-box__edit-image__input"
-							ref="imageInput"
-							type="file"
-							@change="handleImageChange"
+	<section>
+		<div class="container">
+			<div class="profile-form">
+				<div class="profile-form__content">
+					<div class="profile-form__content__avatar-box">
+						<img
+							class="profile-form__content__avatar-box__avatar-image"
+							:src="form.avatar ? form.avatar : './icons/default-user-icon.svg'"
+							alt="User photo"
 						/>
-					</div>
-				</div>
-				<form class="profile-form__content__user-data">
-					<div class="profile-form__content__user-data__user-details">
-						<label
-							class="profile-form__content__user-data__user-details__user-label"
-							for="nickname"
-							>Nickname</label
-						>
-						<InputComponent v-model="form.nickname" />
-					</div>
-					<div class="profile-form__content__user-data__user-fullName">
-						<div
-							class="profile-form__content__user-data__user-fullName__user-details"
-						>
+						<div class="profile-form__content__avatar-box__edit-image">
 							<label
-								class="profile-form__content__user-data__user-fullName__user-details__user-label"
-								for="fname"
-								>First name</label
+								class="profile-form__content__avatar-box__edit-image__icon"
+								@click.prevent="openImageInput"
 							>
-							<InputComponent v-model="form.firstName" disabled />
+							</label>
+							<input
+								class="profile-form__content__avatar-box__edit-image__input"
+								ref="imageInput"
+								type="file"
+								@change="handleImageChange"
+							/>
+						</div>
+					</div>
+					<form class="profile-form__content__user-data">
+						<div class="profile-form__content__user-data__user-details">
+							<label
+								class="profile-form__content__user-data__user-details__user-label"
+								for="nickname"
+								>Nickname</label
+							>
+							<InputComponent v-model="form.nickname" />
+						</div>
+						<div class="profile-form__content__user-data__user-fullName">
+							<div
+								class="profile-form__content__user-data__user-fullName__user-details"
+							>
+								<label
+									class="profile-form__content__user-data__user-fullName__user-details__user-label"
+									for="fname"
+									>First name</label
+								>
+								<InputComponent v-model="form.firstName" disabled />
+							</div>
+							<div class="profile-form__content__user-data__user-details">
+								<label
+									class="profile-form__content__user-data__user-details__user-label"
+									for="lname"
+									>Last name</label
+								>
+								<InputComponent v-model="form.lastName" disabled />
+							</div>
 						</div>
 						<div class="profile-form__content__user-data__user-details">
 							<label
 								class="profile-form__content__user-data__user-details__user-label"
-								for="lname"
-								>Last name</label
+								for="email"
+								>Email</label
 							>
-							<InputComponent v-model="form.lastName" disabled />
+							<InputComponent v-model="form.email" />
 						</div>
-					</div>
-					<div class="profile-form__content__user-data__user-details">
-						<label
-							class="profile-form__content__user-data__user-details__user-label"
-							for="email"
-							>Email</label
-						>
-						<InputComponent v-model="form.email" />
-					</div>
-					<div class="profile-form__content__user-data__user-details">
-						<label
-							class="profile-form__content__user-data__user-details__user-label"
-							for="profession"
-							>Profession</label
-						>
-						<InputComponent v-model="form.profession" />
-					</div>
+						<div class="profile-form__content__user-data__user-details">
+							<label
+								class="profile-form__content__user-data__user-details__user-label"
+								for="profession"
+								>Profession</label
+							>
+							<InputComponent v-model="form.profession" />
+						</div>
 
-					<div class="profile-form__content__user-data__user-details">
-						<label
-							class="profile-form__content__user-data__user-details__user-label"
-							for="skills"
-							>Skills</label
-						>
-						<InputComponent v-model="form.skills" />
-					</div>
+						<div class="profile-form__content__user-data__user-details">
+							<label
+								class="profile-form__content__user-data__user-details__user-label"
+								for="skills"
+								>Skills</label
+							>
+							<InputComponent v-model="form.skills" />
+						</div>
 
-					<div class="profile-form__content__user-data__buttons">
-						<button
-							type="button"
-							class="profile-form__content__user-data__buttons__cancel-button"
-							:disabled="!isDisabled"
-							:class="{ disabledButton: !isDisabled }"
-							@click.prevent="cancelChangedData"
-						>
-							Cancel
-						</button>
-						<button
-							type="button"
-							class="profile-form__content__user-data__buttons__save-button"
-							:class="{ disabledButton: !isDisabled }"
-							:disabled="!isDisabled"
-							@click.prevent="saveData"
-						>
-							Save
-						</button>
-					</div>
-				</form>
+						<div class="profile-form__content__user-data__buttons">
+							<button
+								type="button"
+								class="profile-form__content__user-data__buttons__cancel-button"
+								:disabled="!isDisabled"
+								:class="{ disabledButton: !isDisabled }"
+								@click.prevent="cancelChangedData"
+							>
+								Cancel
+							</button>
+							<button
+								type="button"
+								class="profile-form__content__user-data__buttons__save-button"
+								:class="{ disabledButton: !isDisabled }"
+								:disabled="!isDisabled"
+								@click.prevent="saveData"
+							>
+								Save
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup>
@@ -108,8 +110,6 @@ import { onMounted, ref, computed } from "vue";
 import { useUserStore } from "../stores/userStore";
 import api from "../api";
 import InputComponent from "../components/InputComponent.vue";
-
-
 
 const userStore = useUserStore();
 const form = ref({

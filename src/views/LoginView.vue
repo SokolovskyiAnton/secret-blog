@@ -1,54 +1,58 @@
 <template>
-	<div class="login">
-		<div class="login__content">
-			<div class="login__content__header">
-				<h1 class="login__content__header__title">Log In</h1>
-			</div>
-			<form @submit.prevent="handleSubmit" class="login__content__form">
-				<div class="login__content__form__item">
-          <InputComponent
-              v-model="email"
-              borderless
-              placeholder="Email"
-              :error="v$.email.$error"
-          />
-					<span
-						v-if="v$.email.$error"
-						class="login__content__form__item__error"
-					>
-						{{ v$.email.$errors[0].$message }}
-					</span>
+	<section>
+		<div class="login">
+			<div class="login__content">
+				<div class="login__content__header">
+					<h1 class="login__content__header__title">Log In</h1>
 				</div>
-				<div class="login__content__form__item">
-          <InputComponent
-              v-model="password"
-              borderless
-              type="password"
-              placeholder="Password"
-              :error="v$.password.$error"
-          />
-					<span
-						v-if="v$.password.$error"
-						class="login__content__form__item__error"
-					>
-						{{ v$.password.$errors[0].$message }}
-					</span>
-				</div>
-				<button type="submit" class="login__content__form__btn">Log in</button>
-				<div class="login__content__form__footer">
-					<p>
-						Don't have an account?
-						<router-link
-							class="login__content__form__footer__link"
-							:to="{ name: 'SignupView' }"
+				<form @submit.prevent="handleSubmit" class="login__content__form">
+					<div class="login__content__form__item">
+						<InputComponent
+							v-model="email"
+							borderless
+							placeholder="Email"
+							:error="v$.email.$error"
+						/>
+						<span
+							v-if="v$.email.$error"
+							class="login__content__form__item__error"
 						>
-							Create one
-						</router-link>
-					</p>
-				</div>
-			</form>
+							{{ v$.email.$errors[0].$message }}
+						</span>
+					</div>
+					<div class="login__content__form__item">
+						<InputComponent
+							v-model="password"
+							borderless
+							type="password"
+							placeholder="Password"
+							:error="v$.password.$error"
+						/>
+						<span
+							v-if="v$.password.$error"
+							class="login__content__form__item__error"
+						>
+							{{ v$.password.$errors[0].$message }}
+						</span>
+					</div>
+					<button type="submit" class="login__content__form__btn">
+						Log in
+					</button>
+					<div class="login__content__form__footer">
+						<p>
+							Don't have an account?
+							<router-link
+								class="login__content__form__footer__link"
+								:to="{ name: 'SignupView' }"
+							>
+								Create one
+							</router-link>
+						</p>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script>
@@ -58,7 +62,7 @@ import { useUserStore } from "@/stores/userStore";
 import InputComponent from "@/components/InputComponent.vue";
 
 export default {
-  components: {InputComponent},
+	components: { InputComponent },
 	setup() {
 		return { v$: useVuelidate(), userStore: useUserStore() };
 	},

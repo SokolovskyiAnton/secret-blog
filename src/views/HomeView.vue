@@ -1,26 +1,34 @@
 <template>
-	<div class="container">
-		<button @click="openInfoModal" class="postBtn">Create a Post</button>
-		<div class="post-wrapper">
-			<PostComponent
-				v-for="post in postsData"
-				:key="post.id"
-				:post="post"
-			></PostComponent>
+	<section>
+		<div class="container">
+			<button v-if="isLoggedIn" @click="openModal" class="postBtn">
+				Create a Post
+			</button>
+			<div class="post-wrapper">
+				<PostComponent
+					v-for="post in postsData"
+					:key="post.id"
+					:post="post"
+				></PostComponent>
+			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script setup>
-import { onMounted, computed, ref } from "vue";
+import { onMounted, computed } from "vue";
 import { usePostStore } from "../stores/postStore";
 import PostComponent from "../components/PostComponent.vue";
 import InfoModalComponent from "../components/InfoModalComponent.vue";
 import { useModalStore } from "../stores/modalStore";
+import { useUserStore } from "../stores/userStore";
+import ModalComponent from "../components/ModalComponent.vue";
 
 const postStore = usePostStore();
 
 const modalStore = useModalStore();
+
+const userStore = useUserStore();
 
 onMounted(async () => {
 	if (postStore.isLoaded) return;
@@ -30,12 +38,17 @@ onMounted(async () => {
 
 const postsData = computed(() => postStore.postsList);
 
-const openInfoModal = () => {
+const openModal = () => {
 	modalStore.openModal({
 		component: InfoModalComponent,
 		props: { text: "Props have been successfully passed!" },
 	});
 };
+
+const isLoggedIn = computed(() => {
+	userStore.getUser;
+	return userStore.isAuth === true;
+});
 </script>
 
 <style lang="scss">
@@ -46,13 +59,13 @@ const openInfoModal = () => {
 
 .postBtn {
 	background-color: var(--blue-color-2);
-    color: var(--white-color-1);
-    padding: 12px;
-    border-radius: 12px;
-    width: 100%;
-    border: none;
-    margin-top: 16px;
-    &:hover {
+	color: var(--white-color-1);
+	padding: 12px;
+	border-radius: 12px;
+	width: 100%;
+	border: none;
+	margin-top: 16px;
+	&:hover {
 		cursor: pointer;
 	}
 }
@@ -83,6 +96,10 @@ const openInfoModal = () => {
 		background-color: white;
 		padding: 20px;
 	}
+}
+
+.isVisible {
+	display: none;
 }
 
 @media (max-width: 425px) {
