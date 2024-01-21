@@ -8,7 +8,7 @@ export const useModalStore = defineStore("modal-store", {
 		openModal(payload) {
 			const { props, component } = payload;
 
-            const body = document.body;
+			const body = document.body;
 
 			if (body) body.style.overflow = "hidden";
 

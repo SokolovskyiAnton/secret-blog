@@ -1,11 +1,12 @@
 <template>
-	<form @submit.prevent="handleSubmit" class="postForm">
-		<h1 class="postForm__greeting">Create your own post!</h1>
-		<div class="postForm__addPicture">
-			<button type="button" class="postForm__addPicture__btn">
-				<u>Add a picture</u>
-			</button>
+	<h1 class="postForm__greeting">Create your own post!</h1>
+	<div class="postForm__item">
+		<div class="postForm__item__addPicture">
+			<label> Upload a picture: </label>
+			<input type="file" ref="imageInput" @change="handleImageUpload" />
 		</div>
+	</div>
+	<form @submit.prevent="handleSubmit" class="postForm">
 		<div class="postForm__item">
 			<InputComponent
 				v-model="form.title"
@@ -57,11 +58,16 @@ import { ref, computed } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
 import InputComponent from "@/components/InputComponent.vue";
+import { usePostStore } from "../stores/postStore";
+import { useFileStore } from "../stores/fileStore";
+
+const emits = defineEmits(["close"]);
 
 const form = ref({
 	title: "",
 	fullText: "",
 	description: "",
+	image: "",
 });
 
 const validations = computed(() => ({
@@ -83,33 +89,45 @@ const validations = computed(() => ({
 
 const validate = useVuelidate(validations, { form });
 
+const postStore = usePostStore();
+
 const handleSubmit = async () => {
 	try {
-		await validate.value.$validate();
+		const isFormCorrect = await validate.value.$validate();
+
+		if (!isFormCorrect) return;
+
+		await postStore.createPost(form.value);
+
+		await postStore.getPosts();
+
+		emits("close");
 	} catch (error) {
 		console.log(error);
 	}
 };
+
+const imageInput = ref(null);
+
+const fileStore = useFileStore();
+
+const handleImageUpload = async (event) => {
+	const file = event.target.files[0];
+
+	const formData = new FormData();
+
+	formData.append("file", file);
+
+	form.value.image = await fileStore.uploadImage(formData);
+};
 </script>
 
 <style lang="scss" scoped>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 
 .postForm {
 	&__greeting {
 		display: flex;
 		justify-content: center;
-	}
-	&__input {
-		padding: var(--grid-12);
-		border-radius: var(--grid-12);
-		border: 2px solid var(--black-color-5);
-		width: 100%;
-		margin: 16px 0 16px;
 	}
 	&__addPicture {
 		display: flex;

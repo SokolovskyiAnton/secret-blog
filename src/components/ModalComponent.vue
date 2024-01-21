@@ -13,7 +13,11 @@
 					<div class="modal__inner__header">
 						<span @click.self="modalStore.closeModal">&#9587;</span>
 					</div>
-					<component :is="component" v-bind="props" />
+					<component
+						:is="component"
+						v-bind="props"
+						@close="modalStore.closeModal"
+					/>
 				</div>
 			</div>
 		</Transition>
@@ -23,6 +27,8 @@
 <script setup>
 import { computed, onMounted, onUnmounted } from "vue";
 import { useModalStore } from "../stores/modalStore";
+
+defineEmits(["close"]);
 
 const modalStore = useModalStore();
 
@@ -47,12 +53,13 @@ onUnmounted(() => {
 	position: fixed;
 	left: 0;
 	top: 0;
+	bottom: 0;
+	right: 0;
 	z-index: 500;
-	width: 100vw;
-	height: 100vh;
 	background: var(--black-color-6);
-	display: grid;
-	place-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	&__inner {
 		background-color: white;
@@ -83,12 +90,4 @@ onUnmounted(() => {
 	transition: 0.25s ease all;
 }
 
-@media (max-width: 425px) {
-	.modal__inner {
-		width: 80%;
-		height: fit-content;
-		overflow-y: auto;
-		max-height: 95%;
-	}
-}
 </style>

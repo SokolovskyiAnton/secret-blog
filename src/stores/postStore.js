@@ -13,19 +13,17 @@ export const usePostStore = defineStore("posts", {
 		async getPosts() {
 			try {
 				const response = (await api.get("/posts")).data;
-				this.posts = response.posts
+				this.posts = response.posts;
 			} catch (error) {
 				throw error;
 			}
 		},
 		async createPost(formData) {
 			try {
-				const response = await api.post("/posts", formData);
-				console.log(response);
-
+				await api.post("/posts", formData);
 			} catch (error) {
 				throw error;
 			}
-		}
+		},
 	},
 });
