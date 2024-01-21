@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import {markRaw} from "vue";
 
 const basicState = { component: null, props: {} };
 
@@ -12,7 +13,7 @@ export const useModalStore = defineStore("modal-store", {
 
 			if (body) body.style.overflow = "hidden";
 
-			this.modalState = { component, props: props || {} };
+			this.modalState = { component: markRaw(component), props: props || {} };
 		},
 
 		closeModal() {
