@@ -146,8 +146,7 @@ const handleImageChange = async (event) => {
 };
 
 const saveData = async () => {
-	// ToDO refactor. Create request in store
-	userStore.state = await api.patch(`/users`, form.value);
+	await userStore.updateUserData(form.value);
 };
 
 const cancelChangedData = () => {

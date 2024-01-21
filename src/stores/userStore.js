@@ -31,10 +31,17 @@ export const useUserStore = defineStore("users", {
 				throw error;
 			}
 		},
-		async getUser() {;
+		async getUser() {
 			try {
 				this.user = (await api.get("/auth/user")).data;
 				this.isAuth = true;
+			} catch (error) {
+				throw error;
+			}
+		},
+		async updateUserData(formData) {
+			try {
+				this.state = await api.patch(`/users`, formData);
 			} catch (error) {
 				throw error;
 			}
