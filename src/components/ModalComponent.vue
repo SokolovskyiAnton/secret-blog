@@ -55,7 +55,6 @@ onUnmounted(() => {
 	place-items: center;
 
 	&__inner {
-
 		background-color: white;
 		padding: 40px 48px;
 		border-radius: 1rem;
@@ -63,8 +62,12 @@ onUnmounted(() => {
 		&__header {
 			text-align: right;
 			font-weight: bold;
-			&:hover {
-				cursor: pointer;
+			margin-bottom: 16px;
+			span {
+				font-size: 12px;
+				&:hover {
+					cursor: pointer;
+				}
 			}
 		}
 	}

@@ -18,5 +18,14 @@ export const usePostStore = defineStore("posts", {
 				throw error;
 			}
 		},
+		async createPost(formData) {
+			try {
+				const response = await api.post("/posts", formData);
+				console.log(response);
+
+			} catch (error) {
+				throw error;
+			}
+		}
 	},
 });
