@@ -7,6 +7,7 @@ const post = {
 	description: "Description",
 	dateCreated: "2023-12-10T18:24:43.907Z",
 };
+
 describe("PostComponent", () => {
 	let wrapper;
 	beforeEach(() => {
@@ -28,9 +29,6 @@ describe("PostComponent", () => {
 
 	it("check date format", () => {
 		const date = wrapper.find("small");
-		expect(date.text()).toBe(
-			new Date(post.dateCreated).toLocaleDateString()
-		);
+		expect(date.text()).toBe(new Date(post.dateCreated).toLocaleDateString());
 	});
 });
-

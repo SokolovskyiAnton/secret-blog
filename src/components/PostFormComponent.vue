@@ -9,9 +9,10 @@
 	<form @submit.prevent="handleSubmit" class="postForm">
 		<div class="postForm__item">
 			<InputComponent
+				id="postFormInput1"
 				v-model="form.title"
 				placeholder="Enter the Title"
-				:error="validate.form.title.$error && validate.form.title.$touched"
+				:error="validate.form.title.$error && validate.form.title.$dirty"
 			/>
 			<span v-if="validate?.form.title?.$error" class="postForm__item__error">
 				{{ validate?.form.title?.$errors[0].$message }}
@@ -19,10 +20,11 @@
 		</div>
 		<div class="postForm__item">
 			<InputComponent
+				id="postFormInput2"
 				v-model="form.fullText"
 				placeholder="Enter the Text"
 				:error="
-					validate.form.fullText.$error && validate.form.fullText.$touched
+					validate.form.fullText.$error && validate.form.fullText.$dirty
 				"
 			/>
 			<span
@@ -34,10 +36,11 @@
 		</div>
 		<div class="postForm__item">
 			<InputComponent
+				id="postFormInput3"
 				v-model="form.description"
 				placeholder="Enter the Description"
 				:error="
-					validate.form.fullText.$error && validate.form.description.$touched
+					validate.form.fullText.$error && validate.form.description.$dirty
 				"
 			/>
 			<span
@@ -123,7 +126,6 @@ const handleImageUpload = async (event) => {
 </script>
 
 <style lang="scss" scoped>
-
 .postForm {
 	&__greeting {
 		display: flex;

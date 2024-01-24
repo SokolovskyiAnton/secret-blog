@@ -3,6 +3,8 @@ import InputComponent from "@/components/InputComponent.vue";
 import { shallowMount } from "@vue/test-utils";
 
 
+
+
 const props = {
 	color: "red",
 	bgColor: "black",
