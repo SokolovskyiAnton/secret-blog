@@ -9,7 +9,7 @@
 	<form @submit.prevent="handleSubmit" class="postForm">
 		<div class="postForm__item">
 			<InputComponent
-				id="postFormInput1"
+				id="inputComponent__1"
 				v-model="form.title"
 				placeholder="Enter the Title"
 				:error="validate.form.title.$error && validate.form.title.$dirty"
@@ -20,7 +20,7 @@
 		</div>
 		<div class="postForm__item">
 			<InputComponent
-				id="postFormInput2"
+				id="inputComponent__2"
 				v-model="form.fullText"
 				placeholder="Enter the Text"
 				:error="
@@ -36,7 +36,7 @@
 		</div>
 		<div class="postForm__item">
 			<InputComponent
-				id="postFormInput3"
+				id="inputComponent__3"
 				v-model="form.description"
 				placeholder="Enter the Description"
 				:error="

@@ -19,7 +19,7 @@ describe("PostFormComponent", () => {
 	it("check component validation", async () => {
 		await wrapper.find("button").trigger("submit");
 
-		expect(wrapper.find("#postFormInput2").classes()).toContain(
+		expect(wrapper.find("#inputComponent__2").classes()).toContain(
 			"InputComponent__error"
 		);
     });
@@ -27,9 +27,13 @@ describe("PostFormComponent", () => {
 	it("check creating post", async () => {
         const postStore = usePostStore();
         
-		await wrapper.find("#postFormInput1").setValue("Hello");
-		await wrapper.find("#postFormInput2").setValue("Hello Hello Hello Hello");
-		await wrapper.find("#postFormInput3").setValue("Hello Hello Hello Hello");
+		await wrapper.find("#inputComponent__1").setValue("Hello");
+		await wrapper
+			.find("#inputComponent__2")
+			.setValue("Hello Hello Hello Hello");
+		await wrapper
+			.find("#inputComponent__3")
+			.setValue("Hello Hello Hello Hello");
 		await wrapper.find("button").trigger("submit");
         await flushPromises();
         
