@@ -61,8 +61,6 @@ const styles = computed(() => {
 	};
 });
 
-
-
 const classes = computed(() => {
 	return [
 		props.borderless ? "InputComponent__borderless" : "",

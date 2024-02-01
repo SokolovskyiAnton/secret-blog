@@ -25,5 +25,19 @@ export const usePostStore = defineStore("posts", {
 				throw error;
 			}
 		},
+		async like(postId) {
+			try {
+				await api.post(`/posts/like/${postId}`);
+			} catch (error) {
+				throw error;
+			}
+		},
+		async unlike(postId) {
+			try {
+				await api.delete(`/posts/like/${postId}`);
+			} catch (error) {
+				throw error;
+			}
+		},
 	},
 });

@@ -65,6 +65,8 @@ const isLoggedIn = computed(() => {
 	&__postWrapper {
 		display: flex;
 		flex-wrap: wrap;
+		gap: 20px;
+		margin: 0 16px 20px;
 	}
 }
 
@@ -73,4 +75,7 @@ const isLoggedIn = computed(() => {
 		flex-direction: column;
 	}
 }
+
+
+
 </style>

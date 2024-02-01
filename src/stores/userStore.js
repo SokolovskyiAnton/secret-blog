@@ -41,7 +41,7 @@ export const useUserStore = defineStore("users", {
 		},
 		async updateUserData(formData) {
 			try {
-				this.state = await api.patch(`/users`, formData);
+				this.state = await api.patch("/users", formData);
 			} catch (error) {
 				throw error;
 			}
@@ -50,5 +50,6 @@ export const useUserStore = defineStore("users", {
 			this.isAuth = false;
 			localStorage.removeItem("authToken");
 		},
+		
 	},
 });
