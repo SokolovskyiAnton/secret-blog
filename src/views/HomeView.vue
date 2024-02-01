@@ -63,8 +63,8 @@ const isLoggedIn = computed(() => {
 		}
 	}
 	&__postWrapper {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+    	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 20px;
 		margin: 0 16px 20px;
 	}
@@ -72,7 +72,7 @@ const isLoggedIn = computed(() => {
 
 @media (max-width: 425px) {
 	.section__postWrapper {
-		flex-direction: column;
+		grid-template-columns: 1fr;
 	}
 }
 

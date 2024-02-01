@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useModalStore } from "../stores/modalStore";
 
 defineEmits(["close"]);
