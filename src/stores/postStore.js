@@ -6,9 +6,6 @@ export const usePostStore = defineStore("posts", {
 		posts: [],
 		isLoaded: false,
 	}),
-	getters: {
-		postsList: ({ posts }) => posts,
-	},
 	actions: {
 		async getPosts() {
 			try {

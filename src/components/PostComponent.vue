@@ -53,21 +53,18 @@
 
 <script setup>
 import { useDateFormat } from "@/composables/date";
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { usePostStore } from "../stores/postStore";
 import { useUserStore } from "../stores/userStore";
 import { useModalStore } from "../stores/modalStore";
 import WarningModalComponent from "./WarningModalComponent.vue";
+import { storeToRefs } from "pinia";
 
 const props = defineProps({
 	post: {
 		type: Object,
 		required: true,
-	},
-	likedPosts: {
-		type: Array,
-		required: true,
-	},
+	}
 });
 
 const { format } = useDateFormat();
@@ -77,17 +74,22 @@ const formattedDate = computed(() => format(props.post.dateCreated));
 const postStore = usePostStore();
 const userStore = useUserStore();
 const modalStore = useModalStore();
+const { isAuth } = storeToRefs(userStore)
 
 const liked = ref(props.post.isLiked);
 const count = ref(props.post.likes);
 const isLoading = ref(false);
 
 const handleLike = async (postId) => {
-	if (!userStore.isAuth) {
+	if (!isAuth.value) {
 		modalStore.openModal({
 			component: WarningModalComponent,
+<<<<<<< Updated upstream
 		});
 
+=======
+		})
+>>>>>>> Stashed changes
 		return;
 	}
 
@@ -111,7 +113,7 @@ const handleLike = async (postId) => {
 };
 
 const likeIcon = computed(() => {
-	return liked.value
+	return liked.value && isAuth.value
 		? "src/assets/images/like-icon.svg"
 		: "src/assets/images/unlike-icon.svg";
 });

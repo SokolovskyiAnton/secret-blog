@@ -6,9 +6,11 @@
 			</button>
 			<div class="section__postWrapper">
 				<PostComponent
-					v-for="post in postsData"
-					:key="post.id"
+					v-for="post in posts"
+					:key="post._id"
 					:post="post"
+          @like=""
+          @dislike=""
 				></PostComponent>
 			</div>
 		</div>
@@ -22,20 +24,16 @@ import PostComponent from "../components/PostComponent.vue";
 import PostFormComponent from "../components/PostFormComponent.vue";
 import { useModalStore } from "../stores/modalStore";
 import { useUserStore } from "../stores/userStore";
+import {storeToRefs} from "pinia";
 
 const postStore = usePostStore();
-
 const modalStore = useModalStore();
-
 const userStore = useUserStore();
+const { posts } = storeToRefs(postStore)
 
 onMounted(async () => {
-	if (postStore.isLoaded) return;
 	await postStore.getPosts();
-	postStore.isLoaded = true;
 });
-
-const postsData = computed(() => postStore.postsList);
 
 const openModal = () => {
 	modalStore.openModal({
