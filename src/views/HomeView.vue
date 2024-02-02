@@ -1,16 +1,14 @@
 <template>
-	<section class="section">
+	<section class="homeView">
 		<div class="container">
-			<button v-if="isLoggedIn" @click="openModal" class="section__postBtn">
+			<button v-if="isLoggedIn" @click="openModal" class="homeView__createPost">
 				Create a Post
 			</button>
-			<div class="section__postWrapper">
+			<div class="homeView__postWrapper">
 				<PostComponent
 					v-for="post in posts"
 					:key="post._id"
 					:post="post"
-          @like=""
-          @dislike=""
 				></PostComponent>
 			</div>
 		</div>
@@ -24,12 +22,12 @@ import PostComponent from "../components/PostComponent.vue";
 import PostFormComponent from "../components/PostFormComponent.vue";
 import { useModalStore } from "../stores/modalStore";
 import { useUserStore } from "../stores/userStore";
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 
 const postStore = usePostStore();
 const modalStore = useModalStore();
 const userStore = useUserStore();
-const { posts } = storeToRefs(postStore)
+const { posts } = storeToRefs(postStore);
 
 onMounted(async () => {
 	await postStore.getPosts();
@@ -47,8 +45,9 @@ const isLoggedIn = computed(() => {
 </script>
 
 <style lang="scss">
-.section {
-	&__postBtn {
+.homeView {
+	padding: 16px;
+	&__createPost {
 		background-color: var(--blue-color-2);
 		color: var(--white-color-1);
 		padding: 12px;
@@ -58,23 +57,20 @@ const isLoggedIn = computed(() => {
 		margin-top: 16px;
 		&:hover {
 			cursor: pointer;
-			background-color: var(--blue-color-1)
+			background-color: var(--blue-color-1);
 		}
 	}
 	&__postWrapper {
 		display: grid;
-    	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 48px 20px;
 		margin: 20px 0px 20px;
 	}
 }
 
 @media (max-width: 425px) {
-	.section__postWrapper {
+	.homeView__postWrapper {
 		grid-template-columns: 1fr;
 	}
 }
-
-
-
 </style>

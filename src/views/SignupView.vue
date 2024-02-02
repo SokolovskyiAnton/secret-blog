@@ -121,7 +121,7 @@ export default {
 		return {
 			form: {
 				firstName: { required, minLength: minLength(4) },
-				lastName: { required, minLength: minLength(4) },
+				lastName: { required, minLength: minLength(1) },
 				email: { required, email },
 				password: { required },
 			},

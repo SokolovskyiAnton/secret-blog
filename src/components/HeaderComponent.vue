@@ -154,8 +154,6 @@ const isLoggedIn = computed(() => {
 					content: url("../src/assets/images/black-arrow.svg");
 					position: absolute;
 					opacity: 0;
-					top: 12px;
-					right: -10px;
 					transition: 0.5s;
 				}
 
@@ -168,7 +166,6 @@ const isLoggedIn = computed(() => {
 				&:hover {
 					&::after {
 						opacity: 1;
-						right: 12px;
 					}
 				}
 			}

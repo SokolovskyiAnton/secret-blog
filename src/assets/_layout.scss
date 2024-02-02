@@ -37,36 +37,8 @@
 }
 
 
-@media (max-width: 576px) {
-  .sm-flex-column {
-    flex-direction: column;
-  }
-
-}
-
-@media (min-width: 576px) {
-  .container {
-    max-width: 100%;
-  }
-  .md-flex-row {
-    flex-direction: row;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 960px;
-  }
-}
-
 @media (min-width: 1216px) {
   .container {
     max-width: 1152px;
-  }
-}
-
-@media (min-width: 1408px) {
-  .container {
-    max-width: 1344px;
   }
 }
