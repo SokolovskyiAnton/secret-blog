@@ -138,6 +138,7 @@ const openDropdpown = () => {
 				border-radius: 90%;
 				border: none;
 				background-color: transparent;
+				padding: 4px 4px 0;
 				&:hover {
 					background-color: var(--black-color-7);
 					cursor: pointer;
