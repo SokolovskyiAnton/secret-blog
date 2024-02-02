@@ -60,13 +60,14 @@ const isLoggedIn = computed(() => {
 		margin-top: 16px;
 		&:hover {
 			cursor: pointer;
+			background-color: var(--blue-color-1)
 		}
 	}
 	&__postWrapper {
 		display: grid;
     	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: 20px;
-		margin: 0 16px 20px;
+		gap: 48px 20px;
+		margin: 20px 0px 20px;
 	}
 }
 

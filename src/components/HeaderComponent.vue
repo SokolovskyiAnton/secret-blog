@@ -63,6 +63,7 @@ const isAuth = computed(() => userStore.isAuth);
 const isLoggedIn = computed(() => {
 	return router.currentRoute.value.name === "LoginView" || userStore.isAuth;
 });
+
 </script>
 
 <style lang="scss">
@@ -94,7 +95,7 @@ const isLoggedIn = computed(() => {
 					&__dropbtn {
 						background-color: var(--red-color-1);
 						cursor: pointer;
-
+						border-radius: 50%;
 						&:hover {
 							background-color: var(--red-color-2);
 						}

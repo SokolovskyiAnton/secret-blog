@@ -1,6 +1,26 @@
 <template>
 	<div class="post">
 		<div class="post__content">
+			<div class="post__content__dropdown">
+				<button
+					class="post__content__dropdown__btn"
+					@click.prevent="openDropdpown"
+				>
+					<img
+						src="../assets/images/more-icon.svg"
+						alt="more icon"
+						class="post__content__dropdown__btn__icon"
+					/>
+				</button>
+				<div
+					class="post__content__dropdown__content"
+					:class="{
+						post__content__dropdown__content__visible: isDropdownVisible,
+					}"
+				>
+					<a href="#" @click.prevent="editPost"> Edit Post</a>
+				</div>
+			</div>
 			<img
 				src="../assets/images/post-picture.svg"
 				alt="mountains"
@@ -66,7 +86,7 @@ const handleLike = async (postId) => {
 	if (!userStore.isAuth) {
 		modalStore.openModal({
 			component: WarningModalComponent,
-		})
+		});
 
 		return;
 	}
@@ -95,16 +115,63 @@ const likeIcon = computed(() => {
 		? "src/assets/images/like-icon.svg"
 		: "src/assets/images/unlike-icon.svg";
 });
+
+const isDropdownVisible = ref(false);
+
+const openDropdpown = () => {
+	isDropdownVisible.value = !isDropdownVisible.value;
+};
 </script>
 
 <style lang="scss">
 .post {
-	display: flex;
-	justify-content: center;
-	flex: 1 1 calc(33.33% - 16px);
 	&__content {
+		display: flex;
+		flex-direction: column;
+		&__dropdown {
+			width: 40px;
+			height: 40px;
+			margin-left: auto;
+			position: relative;
+			display: inline-block;
+			&__btn {
+				border-radius: 90%;
+				border: none;
+				background-color: transparent;
+				&:hover {
+					background-color: var(--black-color-7);
+					cursor: pointer;
+				}
+			}
+
+			&__content {
+				display: none;
+				position: absolute;
+				right: 0;
+				background-color: #f9f9f9;
+				min-width: 160px;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				z-index: 1;
+				&__visible {
+					display: block;
+					border-radius: 8px;
+				}
+
+				a {
+					color: var(--black-color-2);
+					padding: 12px 14px;
+					text-decoration: none;
+					display: block;
+
+					&:hover {
+						background-color: #f1f1f1;
+						border-radius: 8px;
+					}
+				}
+			}
+		}
 		&__img {
-			margin: 32px 0 32px;
+			margin: 16px 0 32px;
 			display: block;
 			height: auto;
 			width: 100%;
@@ -132,12 +199,6 @@ const likeIcon = computed(() => {
 				}
 			}
 		}
-	}
-}
-
-@media (max-width: 768px) {
-	.post {
-		flex: 1 1 calc(50% - 16px);
 	}
 }
 </style>
