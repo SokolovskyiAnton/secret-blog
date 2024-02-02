@@ -23,10 +23,9 @@ const routes = [
 		beforeEnter: IsAuthenticated
 	},
 	{
-		path: "/postdet",
-		name: "PostDet",
-		component: () => import('@/views/PostDetailing.vue'),
-		beforeEnter: IsAuthenticated
+		path: "/post/:postId",
+		name: "PostDetail",
+		component: () => import('@/views/PostDetailView.vue')
 	},
 	{
 		path: "/",

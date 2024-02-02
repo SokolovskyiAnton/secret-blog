@@ -1,38 +1,38 @@
 <template>
 	<div class="post">
 		<div class="post__content">
-			<div class="post__content__main" @click.prevent="toPostDetailing" title="Click anywhere to expand the post">
-				<div class="post__content__main__dropdown">
-					<button
-						class="post__content__main__dropdown__btn"
-						@click.prevent="openDropdpown"
-					>
-						<img
-							src="../assets/images/more-icon.svg"
-							alt="more icon"
-							class="post__content__main__dropdown__btn__icon"
-						/>
-					</button>
-					<!-- EDIT/DELETE BUTTON -->
-					<!-- <div
-					class="post__content__main__dropdown__content"
-					:class="{
-						post__content__main__dropdown__content__visible: isDropdownVisible,
-					}"
-				>
-					<div class="post__content__main__dropdown__content__editBtn">
-						<img
-							src="../assets/images/edit-post-icon.svg"
-							alt="edit post icon"
-						/>
-						<a href="#" @click.prevent="openModal"> Edit Post</a>
-					</div>
-					<div class="post__content__main__dropdown__content__deleteBtn">
-						<img src="../assets/images/trash-icon.svg" alt="delete post icon" />
-						<a href="#" @click.prevent="openModal"> Delete Post</a>
-					</div>
-				</div> -->
-				</div>
+			<div class="post__content__main" @click.prevent="toPostDetailing(post._id)" title="Click anywhere to expand the post">
+<!--				<div class="post__content__main__dropdown">-->
+<!--					<button-->
+<!--						class="post__content__main__dropdown__btn"-->
+<!--						@click.prevent="openDropdpown"-->
+<!--					>-->
+<!--						<img-->
+<!--							src="../assets/images/more-icon.svg"-->
+<!--							alt="more icon"-->
+<!--							class="post__content__main__dropdown__btn__icon"-->
+<!--						/>-->
+<!--					</button>-->
+<!--					&lt;!&ndash; EDIT/DELETE BUTTON &ndash;&gt;-->
+<!--					&lt;!&ndash; <div-->
+<!--					class="post__content__main__dropdown__content"-->
+<!--					:class="{-->
+<!--						post__content__main__dropdown__content__visible: isDropdownVisible,-->
+<!--					}"-->
+<!--				>-->
+<!--					<div class="post__content__main__dropdown__content__editBtn">-->
+<!--						<img-->
+<!--							src="../assets/images/edit-post-icon.svg"-->
+<!--							alt="edit post icon"-->
+<!--						/>-->
+<!--						<a href="#" @click.prevent="openModal"> Edit Post</a>-->
+<!--					</div>-->
+<!--					<div class="post__content__main__dropdown__content__deleteBtn">-->
+<!--						<img src="../assets/images/trash-icon.svg" alt="delete post icon" />-->
+<!--						<a href="#" @click.prevent="openModal"> Delete Post</a>-->
+<!--					</div>-->
+<!--				</div> &ndash;&gt;-->
+<!--				</div>-->
 				<img
 					:src="postPicture"
 					alt="mountains"
@@ -67,7 +67,7 @@
 
 <script setup>
 import { useDateFormat } from "@/composables/date";
-import { computed, ref, onMounted } from "vue";
+import { computed, ref } from "vue";
 import { usePostStore } from "../stores/postStore";
 import { useUserStore } from "../stores/userStore";
 import { useModalStore } from "../stores/modalStore";
@@ -138,8 +138,8 @@ const postPicture = computed(() => {
 		: image.value;
 });
 
-const toPostDetailing = () => {
-	router.push("/postdet")
+const toPostDetailing = (postId) => {
+	router.push({ name: 'PostDetail', params: { postId } })
 }
 
 // const isDropdownVisible = ref(false);
