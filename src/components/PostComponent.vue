@@ -1,8 +1,13 @@
 <template>
 	<div class="post">
 		<div class="post__content">
-			<div class="post__content__main" @click.prevent="toPostDetailing" title="Click anywhere to expand the post">
-				<div class="post__content__main__dropdown">
+			<div
+				class="post__content__main"
+				@click.prevent="toPostDetailing"
+				title="Click anywhere to expand the post"
+			>
+				<!--EDIT BUTTON-->
+				<!-- <div class="post__content__main__dropdown">
 					<button
 						class="post__content__main__dropdown__btn"
 						@click.prevent="openDropdpown"
@@ -13,31 +18,37 @@
 							class="post__content__main__dropdown__btn__icon"
 						/>
 					</button>
-					<!-- EDIT/DELETE BUTTON -->
-					<!-- <div
-					class="post__content__main__dropdown__content"
-					:class="{
-						post__content__main__dropdown__content__visible: isDropdownVisible,
-					}"
-				>
-					<div class="post__content__main__dropdown__content__editBtn">
-						<img
-							src="../assets/images/edit-post-icon.svg"
-							alt="edit post icon"
-						/>
-						<a href="#" @click.prevent="openModal"> Edit Post</a>
-					</div>
-					<div class="post__content__main__dropdown__content__deleteBtn">
-						<img src="../assets/images/trash-icon.svg" alt="delete post icon" />
-						<a href="#" @click.prevent="openModal"> Delete Post</a>
+					<div
+						class="post__content__main__dropdown__content"
+						:class="{
+							post__content__main__dropdown__content__visible:
+								isDropdownVisible,
+						}"
+					>
+						<div class="post__content__main__dropdown__content__editBtn">
+							<img
+								src="../assets/images/edit-post-icon.svg"
+								alt="edit post icon"
+							/>
+							<a href="#" @click.prevent="openModal"> Edit Post</a>
+						</div>
+						<div class="post__content__main__dropdown__content__deleteBtn">
+							<img
+								src="../assets/images/trash-icon.svg"
+								alt="delete post icon"
+							/>
+							<a href="#" @click.prevent="openModal"> Delete Post</a>
+						</div>
 					</div>
 				</div> -->
+				<div class="post__content__main__picture">
+					<img
+						:src="postPicture"
+						alt="mountains"
+						class="post__content__main__picture__img"
+					/>
 				</div>
-				<img
-					:src="postPicture"
-					alt="mountains"
-					class="post__content__main__img"
-				/>
+
 				<h1>{{ post.title }}</h1>
 				<div class="post__content__main__description">
 					<p>{{ post.description }}</p>
@@ -98,7 +109,6 @@ const image = ref(props.post.image);
 
 const router = useRouter();
 
-
 const handleLike = async (postId) => {
 	if (!isAuth.value) {
 		modalStore.openModal({
@@ -139,8 +149,8 @@ const postPicture = computed(() => {
 });
 
 const toPostDetailing = () => {
-	router.push("/postdet")
-}
+	router.push("/postdet");
+};
 
 // const isDropdownVisible = ref(false);
 
@@ -157,6 +167,9 @@ const toPostDetailing = () => {
 
 <style lang="scss">
 .post {
+	box-shadow: 10px 10px 5px var(--black-color-8);
+	padding: 14px;
+	border-radius: 12px;
 	&__content {
 		&__main {
 			display: flex;
@@ -185,7 +198,6 @@ const toPostDetailing = () => {
 					right: 0;
 					background-color: #f9f9f9;
 					min-width: 160px;
-					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 					z-index: 1;
 					&__editBtn,
 					&__deleteBtn {
@@ -211,12 +223,29 @@ const toPostDetailing = () => {
 					}
 				}
 			}
-			&__img {
-				margin: 16px 0 32px;
-				display: block;
-				height: auto;
-				width: 100%;
-				box-shadow: 10px 10px 5px var(--black-color-8);
+			&__picture {
+				// width: 352px;
+				max-width: 100%;
+				height: 360px;
+				// max-height: 100%;
+				// padding: 12px 0;
+				// max-height: 360px; /* Set a maximum height for the image container */
+				// overflow: hidden; /* Hide any overflow content */
+				// width: 100%;
+				// height: 100%;
+				position: relative;
+				padding: 12px 0;
+				&__img {
+					// display: block;
+					// height: auto;
+					// object-fit: cover;
+					width: 100%;
+					// max-height: 360px;
+					height: 100%;
+					// max-width: 100%; /* Ensure image doesn't exceed the width of its container */
+					// height: auto; /* Maintain aspect ratio */
+					object-fit: cover;
+				}
 			}
 
 			h1,
