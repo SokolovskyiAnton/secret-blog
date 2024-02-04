@@ -78,7 +78,7 @@
 
 <script setup>
 import { useDateFormat } from "@/composables/date";
-import { computed, ref, onMounted } from "vue";
+import { computed, ref } from "vue";
 import { usePostStore } from "../stores/postStore";
 import { useUserStore } from "../stores/userStore";
 import { useModalStore } from "../stores/modalStore";
@@ -148,9 +148,9 @@ const postPicture = computed(() => {
 		: image.value;
 });
 
-const toPostDetailing = () => {
-	router.push("/postdet");
-};
+const toPostDetailing = (postId) => {
+	router.push({ name: 'PostDetail', params: { postId } })
+}
 
 // const isDropdownVisible = ref(false);
 
