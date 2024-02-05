@@ -9,6 +9,7 @@
 					v-for="post in posts"
 					:key="post._id"
 					:post="post"
+					@postClicked="toPostDetail"
 				></PostComponent>
 			</div>
 		</div>
@@ -23,6 +24,7 @@ import PostFormComponent from "../components/PostFormComponent.vue";
 import { useModalStore } from "../stores/modalStore";
 import { useUserStore } from "../stores/userStore";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
 const postStore = usePostStore();
 const modalStore = useModalStore();
@@ -42,6 +44,12 @@ const openModal = () => {
 const isLoggedIn = computed(() => {
 	return userStore.isAuth;
 });
+
+const router = useRouter();
+
+const toPostDetail = (postId) => {
+	router.push({ name: "PostDetail", params: { postId } });
+};
 </script>
 
 <style lang="scss">
