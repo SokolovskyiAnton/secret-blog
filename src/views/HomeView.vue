@@ -1,7 +1,7 @@
 <template>
 	<section class="homeView">
 		<div class="container">
-			<button v-if="isLoggedIn" @click="openModal" class="homeView__createPost">
+			<button v-if="isAuth" @click="openModal" class="homeView__createPost">
 				Create a Post
 			</button>
 			<div class="homeView__postWrapper">
@@ -9,7 +9,9 @@
 					v-for="post in posts"
 					:key="post._id"
 					:post="post"
-					@postClicked="toPostDetail"
+					:disabled="isLikingDisabled"
+					@redirect="handleRedirect"
+					@setLike="handleLike"
 				></PostComponent>
 			</div>
 		</div>
@@ -17,19 +19,24 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, ref } from "vue";
 import { usePostStore } from "../stores/postStore";
 import PostComponent from "../components/PostComponent.vue";
 import PostFormComponent from "../components/PostFormComponent.vue";
 import { useModalStore } from "../stores/modalStore";
 import { useUserStore } from "../stores/userStore";
+import WarningModalComponent from "../components/WarningModalComponent.vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+
+defineEmits(["redirect", "setLike"]);
 
 const postStore = usePostStore();
 const modalStore = useModalStore();
 const userStore = useUserStore();
 const { posts } = storeToRefs(postStore);
+const { isAuth } = storeToRefs(userStore);
+const isLikingDisabled = ref(false);
 
 onMounted(async () => {
 	await postStore.getPosts();
@@ -41,14 +48,32 @@ const openModal = () => {
 	});
 };
 
-const isLoggedIn = computed(() => {
-	return userStore.isAuth;
-});
-
 const router = useRouter();
 
-const toPostDetail = (postId) => {
+const handleRedirect = (postId) => {
 	router.push({ name: "PostDetail", params: { postId } });
+};
+
+const handleLike = async (likeState, postId) => {
+	if (!isAuth.value) {
+		modalStore.openModal({
+			component: WarningModalComponent,
+		});
+		return;
+	}
+
+	try {
+		isLikingDisabled.value = true;
+		if (likeState) {
+			await postStore.unlike(postId);
+		} else {
+			await postStore.like(postId);
+		}
+	} catch (error) {
+		console.error(error);
+	} finally {
+		isLikingDisabled.value = false;
+	}
 };
 </script>
 

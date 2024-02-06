@@ -54,15 +54,19 @@
 
 		<div class="post__footer">
 			<small>{{ formattedDate }}</small>
-			<div class="post__footer__likeBtn">
+			<div class="post__footer__like">
 				<button
-					class="post__footer__likeBtn__toggle"
-					:disabled="isLoading"
+					class="post__footer__like__toggle"
+					:disabled="disabled"
 					@click.prevent="handleLike(post._id)"
 				>
-					<img :src="likeIcon" alt="like icon" />
+					<img
+						:src="likeIcon"
+						alt="like icon"
+						class="post__footer__like__toggle__img"
+					/>
 				</button>
-				<div>{{ count }}</div>
+				<div class="post__footer__like__count">{{ count }}</div>
 			</div>
 		</div>
 	</div>
@@ -71,58 +75,44 @@
 <script setup>
 import { useDateFormat } from "@/composables/date";
 import { computed, ref, toRefs } from "vue";
-import { usePostStore } from "../stores/postStore";
 import { useUserStore } from "../stores/userStore";
-import { useModalStore } from "../stores/modalStore";
-import WarningModalComponent from "./WarningModalComponent.vue";
 import { storeToRefs } from "pinia";
 
+const emit = defineEmits(["redirect", "setLike"]);
 const props = defineProps({
 	post: {
 		type: Object,
 		required: true,
 	},
+	disabled: {
+		type: Boolean,
+		default: false,
+	},
 });
+
+const { post } = toRefs(props);
 
 const { format } = useDateFormat();
 
-const formattedDate = computed(() => format(props.post.dateCreated));
+const formattedDate = computed(() => format(post.value.dateCreated));
 
-const postStore = usePostStore();
 const userStore = useUserStore();
-const modalStore = useModalStore();
 const { isAuth } = storeToRefs(userStore);
 
-const liked = ref(props.post.isLiked);
-const count = ref(props.post.likes);
-const isLoading = ref(false);
-const image = ref(props.post.image);
+const liked = ref(post.value.isLiked);
+const count = ref(post.value.likes);
+const image = ref(post.value.image);
 
 const handleLike = async (postId) => {
-	if (!isAuth.value) {
-		modalStore.openModal({
-			component: WarningModalComponent,
-		});
-		return;
+	emit("setLike", liked.value, postId);
+	if (!isAuth.value) return;
+	if (!liked.value) {
+		count.value++;
+	} else {
+		count.value--;
 	}
 
-	try {
-		isLoading.value = true;
-
-		if (!liked.value) {
-			await postStore.like(postId);
-			count.value++;
-		} else {
-			await postStore.unlike(postId);
-			count.value--;
-		}
-
-		liked.value = !liked.value;
-	} catch (error) {
-		throw error;
-	} finally {
-		isLoading.value = false;
-	}
+	liked.value = !liked.value;
 };
 
 const likeIcon = computed(() => {
@@ -137,11 +127,8 @@ const postPicture = computed(() => {
 		: image.value;
 });
 
-const { post } = toRefs(props);
-const emit = defineEmits(["postClicked"])
-
 const handleClick = () => {
-	emit("postClicked", post.value._id);
+	emit("redirect", post.value._id);
 };
 
 // const isDropdownVisible = ref(false);
@@ -239,7 +226,7 @@ const handleClick = () => {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		&__likeBtn {
+		&__like {
 			display: flex;
 			align-items: center;
 			gap: 5px;
