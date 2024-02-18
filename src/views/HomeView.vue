@@ -14,6 +14,12 @@
 					@setLike="handleLike"
 				></PostComponent>
 			</div>
+			<PaginationComponent
+				v-if="pagination?.limit"
+				:paginationProp="pagination"
+				@goBack="handleGoBack"
+				@goForward="handleGoForward"
+			/>
 		</div>
 	</section>
 </template>
@@ -28,13 +34,14 @@ import { useUserStore } from "../stores/userStore";
 import WarningModalComponent from "../components/WarningModalComponent.vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
+import PaginationComponent from "../components/PaginationComponent.vue";
 
-defineEmits(["redirect", "setLike"]);
+defineEmits(["redirect", "setLike", "goBack", "goForward"]);
 
 const postStore = usePostStore();
 const modalStore = useModalStore();
 const userStore = useUserStore();
-const { posts } = storeToRefs(postStore);
+const { posts, pagination } = storeToRefs(postStore);
 const { isAuth } = storeToRefs(userStore);
 const isLikingDisabled = ref(false);
 
@@ -74,6 +81,14 @@ const handleLike = async (likeState, postId) => {
 	} finally {
 		isLikingDisabled.value = false;
 	}
+};
+
+const handleGoBack = async (params) => {
+	await postStore.getPosts(params);
+};
+
+const handleGoForward = async (params) => {
+	await postStore.getPosts(params);
 };
 </script>
 

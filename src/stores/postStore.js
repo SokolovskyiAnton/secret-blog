@@ -4,13 +4,15 @@ import api from "../api";
 export const usePostStore = defineStore("posts", {
 	state: () => ({
 		posts: [],
+		pagination: {},
 		isLoaded: false,
 	}),
 	actions: {
-		async getPosts() {
+		async getPosts(params = {}) {
 			try {
-				const response = (await api.get("/posts")).data;
+				const response = (await api.get("/posts", {params})).data;
 				this.posts = response.posts;
+				this.pagination = response.pagination;
 			} catch (error) {
 				throw error;
 			}
