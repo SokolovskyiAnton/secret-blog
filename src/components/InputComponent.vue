@@ -14,6 +14,7 @@
 <script setup>
 import { computed } from "vue";
 
+// two-way binding ( read vue doc )
 defineEmits(["update:modelValue"]);
 const props = defineProps({
 	color: {

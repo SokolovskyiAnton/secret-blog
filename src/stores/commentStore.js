@@ -8,7 +8,6 @@ export const useCommentStore = defineStore("comments", {
 		async getCommentsByPostId(postId) {
 			try {
                 const response = (await api.get(`/comments/post/${postId}`)).data;
-				console.log(response.comments);
 				return response;
 			} catch (error) {
 				throw error;

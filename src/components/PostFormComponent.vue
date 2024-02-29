@@ -73,7 +73,7 @@ const form = ref({
 	image: "",
 });
 
-const validations = computed(() => ({
+const rules = computed(() => ({
 	form: {
 		title: {
 			required,
@@ -90,12 +90,13 @@ const validations = computed(() => ({
 	},
 }));
 
-const validate = useVuelidate(validations, { form });
+const validate = useVuelidate(rules, { form });
 
 const postStore = usePostStore();
 
 const handleSubmit = async () => {
 	try {
+		// if !isFormCorrect we exit handleSubmit function
 		const isFormCorrect = await validate.value.$validate();
 
 		if (!isFormCorrect) return;

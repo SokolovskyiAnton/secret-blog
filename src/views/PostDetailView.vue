@@ -1,32 +1,34 @@
 <template>
-	<div v-if="loading">
-		<h1>Loading</h1>
-	</div>
-	<div v-else class="post">
-		<div v-if="postData">
-			<div class="post__main">
-				<div class="post__main__picture">
-					<img
-						:src="postPicture"
-						alt="mountains"
-						class="post__main__picture__img"
-					/>
-				</div>
-				<h1 class="mb-8">{{ postData.title }}</h1>
-				<p class="mb-8">{{ postData.description }}</p>
-				<p class="mb-8">Posted by: {{ postData.postedBy.nickname }}</p>
-			</div>
-			<div class="post__footer">
-				<small>{{ formattedDate }}</small>
-			</div>
-
-			<CreateComment @createComment="createComment" />
-
-			<CommentsList :commentsDataProp="commentsData.comments" />
+	<div class="container pa-8">
+		<div v-if="loading">
+			<h1 class="loading">Loading...</h1>
 		</div>
+		<div v-else class="postDetail">
+			<div v-if="postData">
+				<div class="postDetail__main">
+					<div class="postDetail__main__picture">
+						<img
+							:src="postPicture"
+							alt="mountains"
+							class="postDetail__main__picture__img"
+						/>
+					</div>
+					<h1 class="mb-8">{{ postData.title }}</h1>
+					<p class="mb-8">{{ postData.description }}</p>
+				</div>
+				<div class="postDetail__footer">
+					<small>{{ formattedDate }}</small>
+					<p>{{ postData.postedBy.nickname }}</p>
+				</div>
 
-		<div v-else>
-			<h1>Post not found</h1>
+				<CreateComment @createComment="createComment" />
+
+				<CommentsList :commentsDataProp="commentsData.comments" />
+			</div>
+
+			<div v-else>
+				<h1>Post not found</h1>
+			</div>
 		</div>
 	</div>
 </template>
@@ -78,7 +80,7 @@ const createComment = async (message) => {
 const postPicture = computed(() => {
 	return !postData.value.image ||
 		postData.value.image.toLowerCase().endsWith(".svg")
-		? "src/assets/images/post-picture.svg"
+		? "../src/assets/images/post-picture.svg"
 		: postData.value.image;
 });
 
@@ -87,4 +89,28 @@ const { format } = useDateFormat();
 const formattedDate = computed(() => format(postData.value.dateCreated));
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.postDetail {
+	&__main {
+		padding-top: 24px;
+		&__picture {
+			object-fit: contain;
+			display: flex;
+			justify-content: center;
+			padding-bottom: 12px;
+		}
+	}
+	&__footer {
+		display: flex;
+		justify-content: start;
+		gap: 4px;
+		align-items: center;
+		margin-top: 12px;
+	}
+}
+
+.loading {
+	text-align: center;
+	margin-top: 8px;
+}
+</style>

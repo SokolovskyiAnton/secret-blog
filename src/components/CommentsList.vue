@@ -1,11 +1,10 @@
 <template>
-	<div>
+	<div class="pb-24">
 		<CommentsListItem
-            v-for="comment in commentsDataProp"
-            :key="comment.id"
-            :commentsDataProp="comment"
-        />
-
+			v-for="comment in commentsDataProp"
+			:key="comment.id"
+			:commentsDataProp="comment"
+		/>
 	</div>
 </template>
 

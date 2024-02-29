@@ -1,6 +1,6 @@
 <template>
 	<Teleport to="body">
-		<Transition name="modal-fade">
+		<Transition name="modal-fade"> <!-- transition add animation -->
 			<div
 				class="modal"
 				@click.self="modalStore.closeModal"
@@ -13,6 +13,7 @@
 					<div class="modal__inner__header">
 						<span @click.self="modalStore.closeModal">&#9587;</span>
 					</div>
+					 <!-- component is empty. but with attribute is, we pass component inside the attribute -->
 					<component
 						:is="component"
 						v-bind="props"

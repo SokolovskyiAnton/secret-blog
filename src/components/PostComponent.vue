@@ -123,7 +123,7 @@ const likeIcon = computed(() => {
 
 const postPicture = computed(() => {
 	return !image.value || image.value.toLowerCase().endsWith(".svg")
-		? "src/assets/images/post-picture.svg"
+		? "../src/assets/images/post-picture.svg"
 		: image.value;
 });
 
